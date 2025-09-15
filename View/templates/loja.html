@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stytle_loja.css">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- FONTE PADRÃO DO SITE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"rel="stylesheet">
+    <title>Produto</title>
+</head>
+<body>
+    <main id="main">
+        <header id="container_header">
+            <div class="inline left-header">
+                <a href="home.html"><h2>Ecommerce</h2></a>
+                <a href="loja.html">Loja</a>
+                <a href="sobre.html">Sobre</a>
+                <form action="">
+                    <label for="pesquisar"><img class="icones" src="./img/icons_header/lupa.png" alt=""></label>
+                    <input type="text" id="pesquisar" placeholder="Pesquisar">
+                </form>
+            </div>
+            <div class="inline right-header">
+                <a href=""><img src="./img/icons_header/coracao.png" alt=""></a>
+                <a href=""><img src="./img/icons_header/icon_carrinho.png" alt=""></a>
+                <a href="">Login</a>
+            </div>
+        </header>
+
+        <!-- Produtos -->
+        <section id="container">
+            <div class="fundo_preto">
+                <div class="caixa_fundo_preto">
+                    <h2  class="titulo">Loja Feminina</h2>
+                    <p class="subtitulo">Renove sua presença com bolsas que celebram tanto a <br> modernidade quanto a tradição da verdadeira elegância.</p>
+                </div>
+            </div>
+
+            <div class="produtos">
+                <div class="barra-opcoes">
+                    <div class="ordenar">
+                        <select id="ordenar" name="ordenar">
+                            <option value="popular">Ordenar: Popular</option>
+                            <option value="preco-menor">Preço: menor → maior</option>
+                            <option value="preco-maior">Preço: maior → menor</option>
+                            <option value="novidades">Novidades</option>
+                        </select>
+                        <span class="info">Mostrando 1003 Produtos</span>
+                    </div>
+                    
+                </div>
+                <div class="categoria">
+                    
+                    <!-- Filtros -->
+                    <div class="filtros">
+                        <div class="filtros-header">
+                            <h3>Filtros</h3>
+                            <a href="#" class="limpar">Limpar filtros</a>
+                        </div>
+
+                        <!-- Categorias -->
+                        <div class="filtro-categorias">
+                            <h4>Categorias</h4>
+                            <label><input type="checkbox" checked> Clutch</label>
+                            <label><input type="checkbox"> Tote</label>
+                            <label><input type="checkbox"> Crossbody</label>
+                            <label><input type="checkbox"> Bucket</label>
+                            <label><input type="checkbox"> Baguette</label>
+                            <label><input type="checkbox"> Shoulder bag</label>
+                        </div>
+
+                        <!-- Cores -->
+                        <div class="filtro-cores">
+                            <h4>Cores</h4>
+                            <div class="cores">
+                                <span class="cor" style="background:#d28b59"></span>
+                                <span class="cor" style="background:#00a651"></span>
+                                <span class="cor" style="background:#fff; border:1px solid #ccc"></span>
+                                <span class="cor" style="background:#000"></span>
+                                <span class="cor" style="background:#ffed00"></span>
+                                <span class="cor" style="background:#ed1c24"></span>
+                                <span class="cor" style="background:#0072bc"></span>
+                                <span class="cor" style="background:#ec008c"></span>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Bolsas -->
+                
+                    <div class="grid">
+                        <div class="item">
+                            <a href="produto.html"><img src="./img/bolsas/louis-vuitton-bolsa-carryall-vibe.png" alt="Valentino Garavani"></a>
+                            <h3>Bolsa CarryAll Vibe MM<h3>
+                            <p>R$26.900,00</p>
+                        </div>
+
+                        <div class="item">
+                            <img src="./img/bolsas/louis-vuitton-bolsa-speedy-soft-30.avif" alt="Bolsa CarryAll Vibe MM">
+                            <h3>Speedy Soft 30</h3>
+                            <p>R$ 29.800,00</p>
+                        </div>
+
+                        <div class="item">
+                            <a href=""><img src="./img/bolsas/louis-vuitton-organizador-onthego.avif" alt="Clutch Dourada Drapeada"></a>
+                            <h3>Organizador OnTheGo</h3>
+                            <p>R$ 28.600,00</p>
+                        </div>
+
+                        <div class="item">
+                            <img src="./img/bolsas/louis-vuitton-bolsa-alma-bb.avif" alt="Clutch Drapeada 1">
+                            <h3>Bolsa Alma BB</h3>
+                            <p>R$ 13.600,00</p>
+                        </div>
+
+                        <div class="item">
+                            <img src="./img/bolsas/louis-vuitton-bolsa-no-way-vibe.avif" alt="Bolsa Madeleine Nano">
+                            <h3>Bolsa No Way Vibe</h3>
+                            <p>R$ 25.400,00</p>
+                        </div>
+
+                        <div class="item">
+                            <img src="./img/bolsas/louis-vuitton-mini-mochila-venice.webp" alt="Mini Mochila Venice">
+                            <h3>Mini Mochila Venice</h3>
+                            <p>R$ 23.600,00</p>
+                        </div>
+                    </div>
+                <button class = 'button_carregar_produtos' type="submit">Carregar mais produtos</button>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer-newsletter">
+            <div class="footer-container">
+                <!-- Newsletter -->
+                <div class="newsletter-section">
+                    <h2>Inscreva-se na nossa newsletter</h2>
+                    <p>Seja o primeiro a saber sobre nossas ofertas especiais,<br>lançamentos de novos produtos e
+                        eventos</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Adicionar Email" required>
+                        <button type="submit">Inscrever-se</button>
+                    </form>
+                </div>
+
+                <!-- Links -->
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Comprar</h3>
+                        <a href="#">Mulheres</a>
+                        <a href="#">Cartões-presente</a>
+                        <a href="#">Oferta</a>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Ajuda</h3>
+                        <a href="#">Central de Ajuda</a>
+                        <a href="#">Status do pedido</a>
+                        <a href="#">Tabela de tamanhos</a>
+                        <a href="#">Devoluções e Garantia</a>
+                        <a href="#">Contate-nos</a>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Sobre</h3>
+                        <a href="#">Sobre nós</a>
+                        <a href="#">Responsabilidade</a>
+                        <a href="#">Tecnologia e Inovação</a>
+                        <a href="#">Explore nossas histórias</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>

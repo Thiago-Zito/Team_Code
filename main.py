@@ -1,4 +1,4 @@
-from Team_Code.Model.model import create, read, update, delete
+from Model.model import create, read, update, delete
 
 def main():
     create("Bolsa 1", 100, "transversal", "preto")

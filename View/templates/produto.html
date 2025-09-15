@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página do Produto</title>
+  <link rel="stylesheet" href="style_produto.css">
+  <!-- bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <!-- FONTE PADRÃO DO SITE -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+    <main id="container_main">
+        <header id="container_header">
+            <div class="inline left-header">
+                <a href="home.html"><h2>Ecommerce</h2></a>
+                <a href="loja.html">Loja</a>
+                <a href="">Sobre</a>
+                <form action="">
+                    <label for="pesquisar"><img class="icones" src="./img/icons_header/lupa.png" alt=""></label>
+                    <input type="text" id="pesquisar" placeholder="Pesquisar">
+                </form>
+            </div>
+            <div class="inline right-header">
+                <a href=""><img src="./img/icons_header/coracao.png" alt=""></a>
+                <a href=""><img src="./img/icons_header/icon_carrinho.png" alt=""></a>
+                <a href="">Login</a>
+            </div>
+        </header>
+  <div class="produto-container">
+    
+    <!-- Galeria de imagens -->
+            <div class="produto-imagens">
+                <div class="grid-imagens">
+                    <img src="./img/louis-vuitton-bolsa-carryall-vibe-mm-1.avif" alt="Foto 1">
+                    <img src="./img/louis-vuitton-bolsa-carryall-vibe1.avif" alt="Foto 2">
+                    <img src="./img/louis-vuitton-bolsa-carryall-vibe2.avif" alt="Foto 3">
+                    <img src="./img/louis-vuitton-bolsa-carryall-vibe3.avif" alt="Foto 4">
+                </div>
+            </div>
+
+    <!-- Informações do produto -->
+    <div class="produto-info">
+      <h1 class="produto-nome">Bolsa CarryAll Vibe MM</h1>
+      <p class="produto-preco">R$26.900,00</p>
+      <p class="parcelamento">ou 4x de R$ 6.725 sem juros</p>
+
+      <!-- Cores -->
+      <div class="produto-cores">
+        <p>Cor:</p>
+        <span class="cor" style="background-color: #d28c5c;"></span>
+        <span class="cor" style="background-color: #000;"></span>
+      </div>
+
+      <!-- Quantidade -->
+      <div class="produto-quantidade">
+        <p>Quantidade:</p>
+        <div class="quantidade-controle">
+          <button>-</button>
+          <input type="text" value="1">
+          <button>+</button>
+        </div>
+      </div>
+
+      <!-- Botão -->
+      <button class="btn-comprar">Adicionar ao carrinho</button>
+
+      <!-- Links extras -->
+      <div class="produto-links">
+        <a href="#">Frete padrão grátis</a>
+        <a href="#">Devoluções gratuitas</a>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

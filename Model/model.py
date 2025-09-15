@@ -1,15 +1,17 @@
 from sqlalchemy import Column, Integer, String, DECIMAL
-from Team_Code.Model.conexaoDB import SessionLocal, Base
+from conexaoDB import SessionLocal, Base, engine
 
 # ORM de produto
 class Produto(Base):
-    __tablename__ = "Produto"
+    __tablename__ = "Produtos"
 
     id = Column("idProduto", Integer, primary_key = True, nullable = False)
     nome = Column("Nome_Produto", String(100), nullable = False)
     preco = Column("Preço", DECIMAL, nullable = False)
     categoria = Column("Categoria", String(100), nullable = False)
     cor = Column("Cor", String(45), nullable = False)
+
+Base.metadata.create_all(bind=engine)
 
 # CREATE
 def create(nome:str, preco:float, categoria:str, cor:str):
@@ -46,6 +48,3 @@ def delete(id_produto:int):
         session.delete(produto)
         session.commit()
     session.close()
-
-
-
