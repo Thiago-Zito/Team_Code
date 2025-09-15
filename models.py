@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, DECIMAL
-from conexaoDB import SessionLocal, Base, engine
+from Model.conexaoDB import SessionLocal, Base, engine
 
 # ORM de produto
 class Produto(Base):
@@ -10,13 +10,14 @@ class Produto(Base):
     preco = Column("Preço", DECIMAL, nullable = False)
     categoria = Column("Categoria", String(100), nullable = False)
     cor = Column("Cor", String(45), nullable = False)
+    imagem = Column("Imagem", String(100), nullable=False)
 
 Base.metadata.create_all(bind=engine)
 
 # CREATE
-def create(nome:str, preco:float, categoria:str, cor:str):
+def create(nome:str, preco:float, categoria:str, cor:str, imagem:str):
     session = SessionLocal()
-    usuario=Produto(nome = nome, preco = preco, categoria = categoria, cor = cor)
+    usuario=Produto(nome = nome, preco = preco, categoria = categoria, cor = cor, imagem = imagem)
     session.add(usuario)
     session.commit()
     session.close()
@@ -29,7 +30,7 @@ def read():
     return produtos
 
 # UPDATE
-def update(id_produto:int, novo_nome:str, novo_preco:float, nova_categoria:str, nova_cor:str):
+def update(id_produto:int, novo_nome:str, novo_preco:float, nova_categoria:str, nova_cor:str, nova_imagem:str):
     session = SessionLocal()
     produto = session.query(Produto).filter(Produto.id==id_produto).first()
     if produto:
@@ -37,6 +38,7 @@ def update(id_produto:int, novo_nome:str, novo_preco:float, nova_categoria:str, 
         produto.preco = novo_preco
         produto.categoria = nova_categoria
         produto.cor = nova_cor
+        produto.imagem = nova_imagem
         session.commit()
     session.close()
 
@@ -48,3 +50,4 @@ def delete(id_produto:int):
         session.delete(produto)
         session.commit()
     session.close()
+

@@ -1,14 +1,8 @@
-from Model.model import create, read, update, delete
+from fastapi import FastAPI
+from controllers import router
+from fastapi.staticfiles import StaticFiles # Montar pasta de imagem
 
-def main():
-    create("Bolsa 1", 100, "transversal", "preto")
-    
-    produtos = read()  
-    print("Produtos:", produtos)  
+app = FastAPI(title='MVC Produtos')
+app.mount('/View/templates/img', StaticFiles(directory='./View/templates/img'), name='img')
 
-    update(1, "Bolsa 1.1", 125, "tote", "preto")
-
-    delete(1)
-
-if __name__ == "__main__":
-    main()
+app.include_router(router)

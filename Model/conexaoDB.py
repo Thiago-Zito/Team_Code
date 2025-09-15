@@ -28,3 +28,13 @@ engine, SessionLocal = get_engine_session()
 
 # Classe base para os models
 Base = declarative_base()
+
+
+#Função para dependência para injetar sessão no FastAPI
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+        
