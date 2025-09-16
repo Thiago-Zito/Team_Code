@@ -155,6 +155,6 @@ async def excluir_produto(produto_id:int):
     if produto_id not in produtos:
         return {"ERRO":"Jogador ñ existe"}
     del produtos[produto_id]
-    return {"Mensagem":"produto excluído"}
+    return {"Mensagem":"produto Excluído"}
 
 # python -m uvicorn nome_da_api_sem_py:app --reload
