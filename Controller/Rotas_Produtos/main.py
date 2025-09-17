@@ -130,7 +130,7 @@ class Produto(BaseModel):
 @app.post('/cadastrar-produto/{produto_id}')
 async def cadastrar_produto(produto_id:int,produto:Produto):
     if produto_id in produtos:
-        return {"ERRO":"Jogador já existe"}
+        return {"ERRO":"produto já existe"}
     produtos[produto_id]=produto #vai criar o produto
     return produtos[produto_id]
 
@@ -153,7 +153,7 @@ async def atualizar_produto(produto_id:int, produto:Produto):
 @app.delete('/exclusao-produto/{produto_id}')
 async def excluir_produto(produto_id:int):
     if produto_id not in produtos:
-        return {"ERRO":"Jogador ñ existe"}
+        return {"ERRO":"produto ñ existe"}
     del produtos[produto_id]
     return {"Mensagem":"produto Excluído"}
 
