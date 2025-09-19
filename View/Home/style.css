@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+    filter: brightness(0.9);
+}
+
+#container_main{
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+#container_header{
+    margin: 0 auto;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 10px;
+    padding-top: 15px;
+}
+
+.inline{
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+}
+    .left-header{
+        display: flex;
+        align-items: center;
+    }
+    .left-header h2{
+        font-size: 17px;
+        line-height: 1.6
+    }
+    .left-header a{
+        font-size: 13px;
+        text-decoration: none;
+        font-weight: 500;
+        color: black;
+    }
+    .right-header{
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+    .right-header form input{
+        border: none;
+    }
+    .right-header a{
+        font-size: 13px;
+        text-decoration: none;
+        font-weight: 500;
+        color: black;
+    }
+    .icones{
+        width: 15px;
+    }
+
+section{
+    height: 100vh;
+}
+
+/* Topo */
+.container_topo {
+    display: flex;
+    flex-direction: column;   
+    justify-content: space-between;          
+    align-items: center;    
+    text-align: center;   
+    height: 100vh;
+    justify-content: center;    
+}
+    .txt_topo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center;
+        gap: 30px;
+        height: 40vh;
+    }
+    .txt_topo h2 p{
+        background-color: transparent;
+    }
+    .txt_topo h2{
+        font-size: 40px;
+    }
+    .txt_topo p{
+        font-size: 20px;
+        font-weight: 500;
+        opacity: 0.5;
+    }
+    .txt_topo a{
+        
+        text-decoration: none;
+        font-weight: bold;
+        color: black;
+        padding: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border: 2px solid black;
+    }
+
+    .img_topo {
+        background-image: url(./img/imgs_section/bolsa_topo.jpg);
+        background-size: cover;
+        width: 100%;    
+        height: auto;       
+        object-fit: cover;
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        height: 60vh;
+    }
+    .img_topo h2{
+        background-color: transparent;
+        font-size: 40px;
+        color: white;
+        font-weight: 600;
+    }
