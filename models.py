@@ -63,14 +63,14 @@ def delete(id_produto:int):
     session.close()
 
 # teste criar
-# create("Bolsa Similar",7600.000,"couro","marrom","img.jpg")
+# create("Bolsa Auxiliar",7600.000,"Tote","marrom","img.jpg")
 
 # teste ler 
 # produtos = read()
 # print([to_dict(p) for p in produtos])
 
 # teste atualizar
-# update(1, "Bolsa Legítima",3.14,"couro","marrom","img.jpg")
+update(59, "Bolsa Legítima",3.14,"Tote","marrom","louis-vuitton-bolsa-carryall-vibe1.avif")
 
 # teste deletar
-# delete(8)
+# delete(49)

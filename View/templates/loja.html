@@ -351,6 +351,7 @@
   color: #fff;
 }
 
+
     </style>
     <main id="main">
         <header id="container_header">
@@ -404,26 +405,31 @@
                         <!-- Categorias -->
                         <div class="filtro-categorias">
                             <h4>Categorias</h4>
-                            <label><input type="checkbox" checked> Clutch</label>
-                            <label><input type="checkbox"> Tote</label>
-                            <label><input type="checkbox"> Crossbody</label>
-                            <label><input type="checkbox"> Bucket</label>
-                            <label><input type="checkbox"> Baguette</label>
-                            <label><input type="checkbox"> Shoulder bag</label>
+                            <form action="/produtos" method="get">
+                              <label><input class="transparent" type="checkbox" checked> Todos</label>
+                              <label><input type="radio" name="categoria" value="Clutch"> Clutch</label>
+                              <label><input type="radio" name="categoria" value="Tote"> Tote</label>
+                              <label><input type="radio" name="categoria" value="Crossbody"> Crossbody</label>
+                              <label><input type="radio" name="categoria" value="Bucket"> Bucket</label>
+                              <label><input type="radio" name="categoria" value="Baguette"> Baguette</label>
+                              <label><input type="radio" name="categoria" value="Shoulder bag"> Shoulder bag</label>
+                              <button type="submit">Filtrar</button>
+                            </form>
+                            
                         </div>
 
                         <!-- Cores -->
                         <div class="filtro-cores">
                             <h4>Cores</h4>
                             <div class="cores">
-                                <span class="cor" style="background:#d28b59"></span>
-                                <span class="cor" style="background:#00a651"></span>
-                                <span class="cor" style="background:#fff; border:1px solid #ccc"></span>
-                                <span class="cor" style="background:#000"></span>
-                                <span class="cor" style="background:#ffed00"></span>
-                                <span class="cor" style="background:#ed1c24"></span>
-                                <span class="cor" style="background:#0072bc"></span>
-                                <span class="cor" style="background:#ec008c"></span>
+                                <a href=""><span class="cor" style="background:#d28b59"></span></a>
+                                <a href=""><span class="cor" style="background:#00a651"></span></a>
+                                <a href=""><span class="cor" style="background:#fff; border:1px solid #ccc"></span></a>
+                                <a href=""><span class="cor" style="background:#000"></span></a>
+                                <a href=""><span class="cor" style="background:#ffed00"></span></a>
+                                <a href=""><span class="cor" style="background:#ed1c24"></span></a>
+                                <a href=""><span class="cor" style="background:#0072bc"></span></a>
+                                <a href=""><span class="cor" style="background:#ec008c"></span></a>
                             </div>
                         </div>
                     </div>
@@ -444,7 +450,7 @@
                         {%endfor%}
                     </div>
                     {% if produtos %}
-                      <a href="/produtos?offset={{ offset + limit }}" class="button_carregar_produtos">Carregar Mais Produtos</a>
+                      <a href="/produtos?offset={{ offset + limit }}&limit={{ limit }}{% if categoria %}&categoria={{ categoria }}{% endif %}" class="button_carregar_produtos">Carregar Mais Produtos</a>
                     {% endif %}
             </div>
         </section>

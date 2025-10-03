@@ -43,13 +43,22 @@ async def listar_home(request:Request, db:Session = Depends(get_db)):
         'request':request
     })
 
+# http://127.0.0.1:8000/produtos/?categoria=couro
 #Rota para listar produtos na loja.html
 @router.get('/produtos', response_class=HTMLResponse)
-async def listar(request:Request, offset: int = 0, limit: int = 6, db:Session = Depends(get_db)):
-    produtos = db.query(Produto).offset(offset).limit(limit).all() #Puxar produtos do banco de dados com um limite de 6 produtos por tela
-    return templates.TemplateResponse('loja.html', {
-        'request':request, 'produtos':produtos, "offset":offset, "limit": limit
-    })
+async def listar(request: Request, offset: int = 0, limit: int = 6, categoria: str = None, db: Session = Depends(get_db)):
+    query = db.query(Produto)
+
+    if categoria:
+        query = query.filter(Produto.categoria == categoria)
+
+    produtos = query.offset(offset).limit(limit).all()
+
+    if produtos:
+        return templates.TemplateResponse('loja.html', {
+            'request': request, 'produtos': produtos, 'categoria': categoria, 'offset': offset, 'limit': limit})
+    else:
+        return HTMLResponse('<h2>Não há produtos nessa categoria.</h2>', status_code=200)
 
 #Rota para listar único produto
 @router.get('/produto/{id_produto}', response_class=HTMLResponse)
@@ -59,4 +68,3 @@ async def detalhe(request:Request, id_produto:int, db:Session=Depends(get_db)):
         'request':request, 'produto':produto
     })
 
-# Rota 
