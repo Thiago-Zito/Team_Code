@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Ecommerce</title>
+  <link rel="stylesheet" href="style_carrinho.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">Ecommerce</div>
+    
+    <nav class="menu">
+      <a href="#">Loja</a>
+      <a href="#">Sobre</a>
+      <a href="#">Pesquisar</a>
+    </nav>
+
+    <div class="icons">
+      <span class="heart">❤</span>
+      <span class="cart">2</span>
+      <a href="#">Login</a>
+    </div>
+  </header>
+
+  <main class="checkout">
+    <section class="form-section">
+      <h1>Checkout</h1>
+      <div class="steps">
+        <strong>Endereço</strong> <span>——</span> Envio <span>——</span> Pagamento
+      </div>
+
+      <h3>Informações de envio</h3>
+      <form>
+        <div class="row">
+          <input type="text" placeholder="Primeiro Nome">
+          <input type="text" placeholder="Segundo Nome">
+        </div>
+        <input type="text" placeholder="Endereço">
+        <input type="text" placeholder="Apartamento, suite, etc (opcional)">
+        <input type="text" placeholder="Rua">
+        <div class="row">
+          <input type="text" placeholder="País">
+          <select>
+            <option>Cidade</option>
+            <option>São Paulo</option>
+            <option>Rio de Janeiro</option>
+            <option>Brasília</option>
+          </select>
+          <input type="text" placeholder="CEP">
+        </div>
+        <input type="text" placeholder="Opcional">
+        <label>
+          <input type="checkbox"> Salvar informações de contato
+        </label>
+        <button type="submit">Continuar para envio</button>
+      </form>
+    </section>
+
+    <aside class="cart-section">
+      <h3>Seu produto</h3>
+
+      <div class="cart-item">
+        <img src="./img/checkout/bolsa chaneli.jpg" alt="Bolsa Chanel">
+        <div>
+          <p><strong>Bolsa clássica mini Chanel</strong></p>
+          <p>Quantidade: 1 <a href="#">Remover</a></p>
+          <p><strong>R$800</strong></p>
+        </div>
+      </div>
+
+      <div class="cart-item">
+        <img src="./img/checkout/bolsa de couro vermelho.jpg" alt="Bolsa Armani">
+        <div>
+          <p><strong>Bolsa em couro genuíno Steffano Armani</strong></p>
+          <p>Quantidade: 1 <a href="#">Remover</a></p>
+          <p><strong>R$650</strong></p>
+        </div>
+      </div>
+
+      <input type="text" placeholder="Insira o código do cupom aqui">
+
+      <div class="summary">
+        <p>Subtotal <span>R$1450</span></p>
+        <p>Entrega <span>Calculado na próxima etapa</span></p>
+        <hr>
+        <p><strong>Total</strong> <span><strong>R$1450</strong></span></p>
+      </div>
+    </aside>
+  </main>
+</body>
+</html>

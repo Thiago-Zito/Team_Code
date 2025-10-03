@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Avaliações - Mock</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style_cometarios.css">
+
+  <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    ntegrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+ <!-- Header -->
+    <main id="container_main">
+        <header id="container_header">
+            <div class="inline left-header">
+                <a href="home.html"><h2>Ecommerce</h2></a>
+                <a href="loja.html">Loja</a>
+                <a href="sobre.html">Sobre</a>
+                <form action="">
+                    <label for="pesquisar"><img class="icones" src="./img/icons_header/lupa.png" alt=""></label>
+                    <input type="text" id="pesquisar" placeholder="Pesquisar">
+                </form>
+            </div>
+            <div class="inline right-header">
+                <a href=""><img src="./img/icons_header/coracao.png" alt=""></a>
+                <a href="checkout.html"><img src="./img/icons_header/icon_carrinho.png" alt=""></a>
+                <a href="">Login</a>
+            </div>
+        </header>
+
+  <div class="wrap">
+    <!-- Lado Esquerdo -->
+    <section class="left">
+
+      <h1>Avaliações</h1>
+      <div class="Estrelas">
+        <span class="star large" aria-hidden="true"></span>
+        <span class="star large" aria-hidden="true"></span>
+        <span class="star large" aria-hidden="true"></span>
+        <span class="star large" aria-hidden="true"></span>
+        <span class="star large" aria-hidden="true"></span>
+      </div>
+
+      <div class="count">5 Comentários</div>
+
+      <div class="rating-row">
+        <div>5 Estrelas</div>
+        <div class="bar" aria-hidden="true"></div><span>(5)</span>
+      </div>
+      <div class="rating-row">
+        <div>4 Estrelas</div>
+        <div class="bar" aria-hidden="true"></div><span>(1)</span>
+      </div>
+      <div class="rating-row">
+        <div>3 Estrelas</div>
+        <div class="bar" aria-hidden="true"></div><span>(0)</span>
+      </div>
+      <div class="rating-row">
+        <div>2 Estrelas</div>
+        <div class="bar" aria-hidden="true"></div><span>(0)</span>
+      </div>
+      <div class="rating-row">
+        <div>1 Estrelas</div>
+        <div class="bar" aria-hidden="true"></div><span>(0)</span>
+      </div>
+    </section>
+
+    <!-- Lado direito -->
+    <main class="main" aria-label="Comentários">
+      <div class="review-list">
+
+        <div class="review" aria-labelledby="r1-title">
+          <div class="stars-small" aria-hidden="true">
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star"></span>
+          </div>
+
+          <h2 id="r1-title" class="title">Bolsa charmosa e durável</h2>
+
+          <p class="text">
+            Comprei de presente para uma amiga e ela simplesmente amou! A bolsa é prática e estilosa, combina com
+            praticamente todos os looks do guarda-roupa dela.
+            Ela usa tanto no dia a dia, em passeios e caminhadas, quanto em ocasiões mais casuais, o que mostra a
+            versatilidade da peça.
+            Além de funcional, trouxe um charme especial ao estilo dela, tornando-se uma das favoritas.
+          </p>
+
+          <div class="meta">Esta avaliação foi útil? <strong>Sim</strong> ou <span>NÃO</span> <a href="#"
+              aria-label="Separador">|</a> </div>
+
+          <div class="author" aria-hidden="true">Ryan M</div>
+        </div>
+
+        <div class="review small" aria-labelledby="r2-title">
+          <div class="stars-small" aria-hidden="true">
+            <span class="star"></span>
+            <span class="star"></span>
+            <span class="star"></span>
+          </div>
+
+          <h3 id="r2-title" class="title">Bolsa bonita e pronta para o dia a dia</h3>
+
+          <p class="quote">"Adorei a bolsa! Além de estilosa, combina com praticamente tudo do meu guarda-roupa. Uso
+            tanto em passeios mais casuais quanto em saídas do dia a dia, e sempre deixa o look completo."</p>
+
+          <div class="meta">Esta avaliação foi útil? Sim ou Não </div>
+
+          <div class="author" aria-hidden="true">João</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-newsletter">
+
+    <div class="footer-container">
+      <!-- Newsletter -->
+      <div class="newsletter-section">
+        <h2>Inscreva-se na nossa newsletter</h2>
+        <p>Seja o primeiro a saber sobre nossas ofertas especiais, <br>lançamentos de novos produtos e
+          eventos</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Adicionar Email" required>
+          <button type="submit">Inscrever-se</button>
+        </form>
+      </div>
+
+      <!-- Links -->
+      <div class="footer-links">
+        <div class="footer-column">
+          <h3>Comprar</h3>
+          <a href="#">Mulheres</a>
+          <a href="#">Cartões-presente</a>
+          <a href="#">Oferta</a>
+        </div>
+        <div class="footer-column">
+          <h3>Ajuda</h3>
+          <a href="#">Central de Ajuda</a>
+          <a href="#">Contate-nos</a>
+        </div>
+        <div class="footer-column">
+          <h3>Sobre</h3>
+            <a href="sobre.html">Sobre nós</a>
+            <a href="comentario.html">Comentarios</a>
+
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

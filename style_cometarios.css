@@ -1,0 +1,379 @@
+  :root {
+    /* Variáveis de cores e largura máxima */
+    --bg: #eef3f5;        /* cor de fundo da página */
+    --card: #ffffff;      /* (não usado aqui, mas útil p/ fundos de cards) */
+    --muted: #6b7276;     /* cor de texto secundário */
+    --accent: #0b0b0b;    /* cor principal do texto */
+    --line: #e2e6e8;      /* cor das linhas divisórias */
+    --max-width: 1200px;  /* largura máxima do layout */
+  }
+
+  * {
+    box-sizing: border-box; /* garante que padding/borda entrem no cálculo de width/height */
+  }
+
+  html, body {
+    height: 100%; /* ocupa a altura toda da tela */
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Header */
+#container_header {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: 80px;   /* altura fixa do header */
+    width: 100%;
+    grid-template-rows: auto; 
+    gap: 10px;
+    padding: 15px;
+    background-color: #000;
+}
+
+.inline {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.left-header {
+    position: absolute;
+    left: 80px;  /* você pode mudar esse valor */
+    top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.left-header h2 {
+    font-size: 25px;
+    line-height: 1.6;
+    color: white;
+}
+
+.left-header a {
+    font-size: 17px;
+    text-decoration: none;
+    font-weight: 500;
+    color: white;
+}
+
+#pesquisar{
+  background-color: transparent;
+  border: none;
+  color: white;
+
+}
+
+.right-header {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    position: absolute;
+    top: 25px;
+    right: 80px;  /* você pode mudar esse valor */
+}
+
+.right-header form input {
+    border: none;
+}
+
+.right-header a {
+    font-size: 17px;
+    text-decoration: none;
+    font-weight: 500;
+    color: white;
+}
+
+.icones {
+    width: 25px;
+}
+
+
+  body {
+    margin: 0;
+    font-family: "Open Sans", sans-serif;    background: var(--bg); /* fundo clarinho */
+    color: var(--accent);  /* texto principal escuro */
+    -webkit-font-smoothing: antialiased; /* deixa a fonte mais suave */
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ===== Layout principal ===== */
+  .wrap {
+    max-width: var(--max-width); /* centraliza e limita largura */
+    margin: 0 auto;
+    display: grid; /* usa grid layout */
+    grid-template-columns: 260px 1fr; /* coluna esquerda fixa (260px) + direita flexível */
+    gap: 40px; /* espaço entre as colunas */
+    align-items: start;
+    position: relative;
+    top: 100px;
+  }
+
+  /* ===== Título ===== */
+  h1 {
+    font-size: 34px;
+    margin: 6px 0 26px 0;
+    font-weight: 700;
+  }
+
+  /* ===== Coluna esquerda (resumo de notas) ===== */
+  .left {
+    padding-top: 6px;
+  }
+
+  .big-stars {
+    font-size: 24px;
+    letter-spacing: 6px; /* espaço entre estrelas */
+    margin-bottom: 18px;
+  }
+
+  .count {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  /* cada linha de classificação (5 estrelas, 4 estrelas, etc.) */
+  .rating-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    color: var(--muted); /* cinza */
+  }
+
+  .rating-row .bar {
+    flex: 1;
+    height: 2px;
+    background: var(--line); /* linha fininha no meio */
+    margin: 0 12px;
+    border-radius: 2px;
+  }
+
+  .rating-row span:last-child {
+    min-width: 28px;
+    text-align: right; /* número sempre alinhado à direita */
+  }
+
+  /* ===== Coluna direita (avaliações detalhadas) ===== */
+  .review-list {
+    display: flex;
+    flex-direction: column; /* coloca uma avaliação embaixo da outra */
+    gap: 26px;
+  }
+
+  .review {
+    background: transparent;
+    padding: 14px 0 22px 0;
+    border-bottom: 1px solid var(--line); /* separador entre avaliações */
+    position: relative;
+    min-height: 80px;
+  }
+
+  /* estrelas pequenas no topo da avaliação */
+  .stars-small {
+    font-size: 16px;
+    letter-spacing: 4px;
+    color: #111;
+    margin-bottom: 8px;
+  }
+
+  /* título da avaliação */
+  .title {
+    font-weight: 700;
+    font-size: 20px;
+    margin: 2px 0 10px;
+  }
+
+  /* texto principal da avaliação */
+  .text {
+    color: #222;
+    line-height: 1.6; /* altura da linha (espaçamento) */
+    max-width: 760px;
+  }
+
+  /* rodapé da avaliação (links “Sim / Não / Marcar...”) */
+  .meta {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .meta a {
+    color: var(--muted);
+    text-decoration: none;
+    margin-left: 14px;
+  }
+
+  /* nome do autor, jogado bem à direita */
+  .author {
+    position: absolute;
+    right: -230px; /* puxa pra fora da área da review */
+    top: 12px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #0b0b0b;
+    white-space: nowrap; /* impede quebra de linha */
+  }
+
+  /* ajustes para avaliações menores (ex: 2ª review) */
+  .review.small .stars-small {
+    letter-spacing: 2px;
+  }
+
+  .review.small .title {
+    font-size: 18px;
+  }
+
+  .quote {
+    font-style: italic;
+    color: #111;
+    margin: 8px 0;
+  }
+
+  /* ===== Responsividade ===== */
+  @media (max-width: 1100px) {
+    .wrap {
+      grid-template-columns: 200px 1fr; /* diminui a barra lateral */
+      gap: 22px;
+    }
+    .author {
+      right: -160px; /* ajusta a posição do autor */
+    }
+  }
+
+  @media (max-width: 880px) {
+    body {
+      padding: 24px;
+    }
+    .wrap {
+      grid-template-columns: 1fr; /* só uma coluna (mobile) */
+    }
+    .author {
+      position: static; /* autor vai para baixo do texto */
+      margin-top: 8px;
+    }
+  }
+
+  /* ===== Estrelas (desenhadas com CSS) ===== */
+  .star {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+    background: linear-gradient(180deg, #111, #111); /* cor preta */
+    /* forma da estrela feita com clip-path */
+    clip-path: polygon(
+      50% 0%,61% 35%,98% 35%,
+      68% 57%,79% 91%,50% 70%,
+      21% 91%,32% 57%,2% 35%,39% 35%
+    );
+  }
+
+  .star.large {
+    width: 26px;
+    height: 26px;
+    margin-right: 8px;
+  }
+
+  /* Footer */
+  .footer-newsletter {
+    background-color: #000;
+    color: #fff;
+    padding: 60px 20px;
+    margin-top: 280px;
+    width: 100%;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .newsletter-section {
+    flex: 1 1 300px;
+  }
+
+  .newsletter-section h2{
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #fff;
+  }
+
+  .newsletter-section p {
+    font-size: 16px;
+    opacity: 0.8;
+    margin-bottom: 25px;
+    line-height: 1.5;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .newsletter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .newsletter-form input {
+    flex: 1 1 250px;
+    padding: 12px;
+    border: 1px solid #fff;
+    background-color: transparent;
+    color: #fff;
+  }
+
+  .newsletter-form input::placeholder {
+    color: #aaa;
+  }
+
+  .newsletter-form button {
+    padding: 12px 20px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .newsletter-form button:hover {
+    background-color: #e6e6e6;
+  }
+
+  /* Footer links */
+  .footer-links {
+    display: flex;
+    gap: 50px;
+    flex: 2 1 500px;
+    flex-wrap: wrap;
+  }
+
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 150px;
+  }
+
+  .footer-column h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .footer-column a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+
+  .footer-column a:hover {
+    color: #fff;
+  }
+  
