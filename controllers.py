@@ -43,12 +43,12 @@ async def listar_home(request:Request, db:Session = Depends(get_db)):
         'request':request
     })
 
-#Rota para listar produtos
+#Rota para listar produtos na loja.html
 @router.get('/produtos', response_class=HTMLResponse)
-async def listar(request:Request, db:Session = Depends(get_db)):
-    produtos = db.query(Produto).all() #Puxar produtos do banco de dados
-    return templates.TemplateResponse('produtos.html', {
-        'request':request, 'produtos':produtos
+async def listar(request:Request, offset: int = 0, limit: int = 6, db:Session = Depends(get_db)):
+    produtos = db.query(Produto).offset(offset).limit(limit).all() #Puxar produtos do banco de dados com um limite de 6 produtos por tela
+    return templates.TemplateResponse('loja.html', {
+        'request':request, 'produtos':produtos, "offset":offset, "limit": limit
     })
 
 #Rota para listar único produto
@@ -58,3 +58,5 @@ async def detalhe(request:Request, id_produto:int, db:Session=Depends(get_db)):
     return templates.TemplateResponse('produto.html', {
         'request':request, 'produto':produto
     })
+
+# Rota 

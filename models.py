@@ -12,7 +12,18 @@ class Produto(Base):
     cor = Column("Cor", String(45), nullable = False)
     imagem = Column("Imagem", String(100), nullable=False)
 
-Base.metadata.create_all(bind=engine)
+def to_dict(produto: Produto):
+    return {
+        "id": produto.id,
+        "nome": produto.nome,
+        "preco": float(produto.preco),
+        "categoria": produto.categoria,
+        "cor": produto.cor,
+        "imagem": produto.imagem
+    }
+
+
+# Base.metadata.create_all(bind=engine)
 
 # CREATE
 def create(nome:str, preco:float, categoria:str, cor:str, imagem:str):
@@ -51,3 +62,15 @@ def delete(id_produto:int):
         session.commit()
     session.close()
 
+# teste criar
+# create("Bolsa Similar",7600.000,"couro","marrom","img.jpg")
+
+# teste ler 
+# produtos = read()
+# print([to_dict(p) for p in produtos])
+
+# teste atualizar
+# update(1, "Bolsa Legítima",3.14,"couro","marrom","img.jpg")
+
+# teste deletar
+# delete(8)

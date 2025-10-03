@@ -1,27 +1,25 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
-from urllib.parse import quote_plus
 from sqlalchemy.exc import SQLAlchemyError
 
-# Criar engine e session
+# Criar engine e session para SQLite
 def get_engine_session():
     try:
-        user = "root"
-        password = "dev1t@24"
-        database = "ecommerce"
+        database = "ecommerce.db"  # arquivo do banco SQLite
 
-        password = quote_plus(password)
-        engine = create_engine(f'mysql+pymysql://{user}:{password}@localhost:3306/{database}')
+        # Cria engine para SQLite
+        engine = create_engine(f"sqlite:///{database}", echo=True)
+
+        # Testa conexão
         conn = engine.connect()
         conn.close()
-        
-        SessionLocal = sessionmaker(bind=engine)
+
+        SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
         return engine, SessionLocal
     except SQLAlchemyError as e:
-        print("Falha ao conectar ao banco de dados!")
-        print("Verifique as informações: user, password, database.")
+        print("Falha ao conectar ao banco de dados SQLite!")
         print(f"Erro: {e}")
-        return None, None 
+        return None, None
 
 # Obter engine e SessionLocal
 engine, SessionLocal = get_engine_session()
@@ -29,12 +27,13 @@ engine, SessionLocal = get_engine_session()
 # Classe base para os models
 Base = declarative_base()
 
-
-#Função para dependência para injetar sessão no FastAPI
+# Função para dependência no FastAPI
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
-        
+
+# criar banco de dados 
+# Base.metadata.create_all(engine)
