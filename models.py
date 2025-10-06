@@ -70,7 +70,7 @@ def delete(id_produto:int):
 # print([to_dict(p) for p in produtos])
 
 # teste atualizar
-update(59, "Bolsa Legítima",3.14,"Tote","marrom","louis-vuitton-bolsa-carryall-vibe1.avif")
+# update(59, "Bolsa Legítima",3.14,"Tote","marrom","louis-vuitton-bolsa-carryall-vibe1.avif")
 
 # teste deletar
 # delete(49)
