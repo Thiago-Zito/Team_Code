@@ -31,7 +31,7 @@ router = APIRouter() #Rotas
 templates = Jinja2Templates(directory='./View/templates') #Front-end
 
 # Pasta para salvar imagens
-UPLOAD_DIR = './View/templates/img'
+UPLOAD_DIR = '/static/uploads'
 #caminho para o os
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
@@ -68,3 +68,10 @@ async def detalhe(request:Request, id_produto:int, db:Session=Depends(get_db)):
         'request':request, 'produto':produto
     })
 
+
+#Rota para mostrar página sobre
+@router.get('/sobre', response_class=HTMLResponse)
+async def listar_home(request:Request, db:Session = Depends(get_db)):
+    return templates.TemplateResponse('sobre.html', {
+        'request':request
+    })

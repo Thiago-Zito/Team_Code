@@ -141,7 +141,7 @@
 }
 
 .img_topo {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./img/img_topo/princip.webp) no-repeat center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/uploads/img_topo/princip.webp") no-repeat center/cover;
     background-size: cover;
     width: 100%;
     height: auto;

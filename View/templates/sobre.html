@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sobre Nós</title>
-  <link rel="stylesheet" href="style_sobre.css" />
+  <link rel="stylesheet" href="{{url_for('static', path='Pasta_css/style_sobre.css') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
@@ -23,17 +23,17 @@
     <main id="container_main">
         <header id="container_header">
             <div class="inline left-header">
-                <a href="home.html"><h2>Ecommerce</h2></a>
-                <a href="loja.html">Loja</a>
-                <a href="sobre.html">Sobre</a>
+                <a href="/"><h2>Ecommerce</h2></a>
+                <a href="/produtos">Loja</a>
+                <a href="/sobre">Sobre</a>
                 <form action="">
-                    <label for="pesquisar"><img class="icones" src="./img/icons_header/lupa.png" alt=""></label>
+                    <label for="pesquisar"><img class="icones" src="/static/uploads/icons_header/lupa.png" alt=""></label>
                     <input type="text" id="pesquisar" placeholder="Pesquisar">
                 </form>
             </div>
             <div class="inline right-header">
-                <a href=""><img src="./img/icons_header/coracao.png" alt=""></a>
-                <a href=""><img src="./img/icons_header/icon_carrinho.png" alt=""></a>
+                <a href=""><img src="/static/uploads/icons_header/coracao.png" alt=""></a>
+                <a href=""><img src="/static/uploads/icons_header/icon_carrinho.png" alt=""></a>
                 <a href="">Login</a>
             </div>
         </header>
@@ -44,7 +44,7 @@
       <h2>SOBRE NÓS</h2>
 
       <div class="imagem-sobre">
-        <img src="./img/malas_bolsas.webp" alt="Imagem sobre nós" />
+        <img src="/static/uploads/bolsas/malas_bolsas.webp" alt="Imagem sobre nós" />
       </div>
 
       <div class="texto-sobre">
