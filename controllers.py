@@ -31,13 +31,13 @@ router = APIRouter() #Rotas
 templates = Jinja2Templates(directory='./View/templates') #Front-end
 
 # Pasta para salvar imagens
-UPLOAD_DIR = './View/templates/img'
+UPLOAD_DIR = './View/static/img'
 #caminho para o os
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 #Rota para mostrar página home
 @router.get('/', response_class=HTMLResponse)
-async def listar_home(request:Request, db:Session = Depends(get_db)):
+async def listar_home(request:Request):
     #produtos = db.query(Produto).all() #Puxar produtos do banco de dados
     return templates.TemplateResponse('home.html', {
         'request':request
@@ -47,10 +47,11 @@ async def listar_home(request:Request, db:Session = Depends(get_db)):
 #Rota para listar produtos na loja.html
 @router.get('/produtos', response_class=HTMLResponse)
 async def listar(request: Request, offset: int = 0, limit: int = 6, categoria: str = None, db: Session = Depends(get_db)):
-    query = db.query(Produto)
+    query = db.query(Produto) # consultar todos os produtos / economizar linha
 
     if categoria:
-        query = query.filter(Produto.categoria == categoria)
+        query = query.filter(Produto.categoria == categoria) 
+        #como o filter() ñ altera o obj query original a gnt temq armazenar na variável, senão será ignorado
 
     produtos = query.offset(offset).limit(limit).all()
 
@@ -64,7 +65,7 @@ async def listar(request: Request, offset: int = 0, limit: int = 6, categoria: s
 @router.get('/produto/{id_produto}', response_class=HTMLResponse)
 async def detalhe(request:Request, id_produto:int, db:Session=Depends(get_db)):
     produto = db.query(Produto).filter(Produto.id == id_produto).first()
+    
     return templates.TemplateResponse('produto.html', {
         'request':request, 'produto':produto
     })
-
