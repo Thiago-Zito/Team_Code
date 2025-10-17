@@ -16,9 +16,20 @@ class Produto(Base):
     detalhe3 = Column("Detalhe3", String(100), nullable=False)
     detalhe4 = Column("Detalhe4", String(100), nullable=False)
 
+class Usuario(Base):
+    __tablename__ = 'usuarios'
+    id = Column(Integer, primary_key=True, index=True)
+    nome = Column(String(50))
+    email = Column(String(100), unique=True)
+    senha = Column(String(200))
+
 # Criação das tabelas
 # Base.metadata.create_all(bind=engine)
 
+# Criação só da tabela usuarios
+# Usuario.__table__.create(bind=engine, checkfirst=True)
+
+# CRUD PARA PRODUTOS
 # CREATE
 def create(nome:str, preco:float, categoria:str, cor:str, imagem:str, detalhe1:str, detalhe2:str, detalhe3:str, detalhe4:str):
     session = SessionLocal()
@@ -89,3 +100,14 @@ def delete(id_produto:int):
 
 # teste deletar
 # delete(25)
+
+# CRUD PARA USUARIOS 
+# create
+def create_usuario(nome:str, email:str, senha:str):
+    session = SessionLocal()
+    usuario=Usuario(nome=nome, email=email, senha=senha)
+    session.add(usuario)
+    session.commit()
+    session.close()
+
+# create_usuario("Fernando", "feaugustocamussi@gmail.com", "fer2008@")

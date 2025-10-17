@@ -23,7 +23,9 @@ from sqlalchemy.orm import Session
 from Model.conexaoDB import get_db, SessionLocal
 #get_db = injeção do SessionLocal na API
 
-from models import Produto
+from models import Produto, Usuario
+
+from Model.auth import gerar_hash_senha, verificar_senha, criar_token, verificar_token
 
 #Produto = Modelagem, nome, preço, quantidade, imagem
 
@@ -77,3 +79,26 @@ async def listar_home(request:Request, db:Session = Depends(get_db)):
     return templates.TemplateResponse('sobre.html', {
         'request':request
     })
+
+#Rota para mostrar página login
+@router.get('/login', response_class=HTMLResponse)
+async def login(request:Request):
+    return templates.TemplateResponse('login.html', {
+        'request':request
+    })
+
+#verificar se o usuário existe
+@router.post('/login')
+async def login(request:Request, 
+                email:str = Form(...), 
+                senha:str = Form(...),
+                db:Session = Depends(get_db)
+                ):
+    usuario = db.query(Usuario).filter(Usuario.email == email).first()
+    if not usuario or not verificar_senha(senha, usuario.senha):
+        return {'mensagem':'Credenciais inválidas'}
+    else:
+        token = criar_token({'sub':usuario.email})
+        response = RedirectResponse(url='/',status_code=303)
+        response.set_cookie(key='token', value=token, httponly=True)
+        return response
