@@ -1,4 +1,5 @@
 #pip install python-jose passlib
+# pip install bcrypt==4.0.1
 from datetime import datetime, timedelta
 #datetime = ano, mês, dia, hora, minuto, segundo
 #timedelta = adição ou subtração de tempo ou data

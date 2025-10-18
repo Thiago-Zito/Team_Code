@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, DECIMAL
 from Model.conexaoDB import SessionLocal, Base, engine
+from Model.auth import gerar_hash_senha
 
 # ORM de produto
 class Produto(Base):
@@ -110,4 +111,4 @@ def create_usuario(nome:str, email:str, senha:str):
     session.commit()
     session.close()
 
-# create_usuario("Fernando", "feaugustocamussi@gmail.com", "fer2008@")
+# create_usuario("Fernando", "fe@gmail.com", gerar_hash_senha("minhasenha123"))
