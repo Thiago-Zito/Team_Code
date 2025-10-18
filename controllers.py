@@ -109,3 +109,19 @@ async def cadastro(request:Request):
     return templates.TemplateResponse('cadastro.html', {
         'request':request
     })
+@router.post('/register')
+async def cadastrar_usuario(
+    nome:str = Form(...),
+    email:str = Form(...),
+    senha:str = Form(...),
+    db:Session = Depends(get_db)):
+    usuario = db.query(Usuario).filter(Usuario.email == email).first()
+    if usuario:
+        return {'mensagem':'E-mail já cadastrado'}
+    else:
+        senha_hash = gerar_hash_senha(senha)
+        novo_usuario = Usuario(nome=nome, email=email, senha=senha_hash)
+        db.add(novo_usuario)
+        db.commit()
+        db.refresh(novo_usuario)
+        return RedirectResponse(url='/', status_code=303)
