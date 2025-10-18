@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style_cadastro.css">
+    <link rel="stylesheet" href="{{url_for('static', path='Pasta_css/style_cadastro.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<body>
+    <div class="cadastro_container">
+        <div class="background-image"></div> <!-- Imagem de fundo -->
+        <div class="cadastro_box">
+            <h2>Bem-vindo</h2>
+            <p>Cadastre em sua conta</p>
+            <button class="social-login fb"><i class="fab fa-facebook-f"></i> 
+                <span>Continue com o Facebook</span>
+            </button>
+            <button class="social-login google"><i class="fab fa-google"></i> 
+                <span>Continue com o Google</span>
+            </button>
+            <button class="social-login email"><i class="fas fa-envelope"></i>
+                <span>Continue com o Email</span>
+            </button>
+                <form action="/register" method="post">
+                    <input type="text" placeholder="Nome" name="nome" id="">
+                    <input type="email" placeholder="Email" name="email" required>
+                    <input type="password" placeholder="Senha" name="senha" required>
+                    <button type="submit">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+</body>
+</html>

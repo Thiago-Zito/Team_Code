@@ -102,3 +102,10 @@ async def login(request:Request,
         response = RedirectResponse(url='/',status_code=303)
         response.set_cookie(key='token', value=token, httponly=True)
         return response
+    
+#Rota para mostrar página cadastro
+@router.get('/register', response_class=HTMLResponse)
+async def cadastro(request:Request):
+    return templates.TemplateResponse('cadastro.html', {
+        'request':request
+    })
