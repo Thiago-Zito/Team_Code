@@ -1,0 +1,190 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #f2f3f7;
+  color: #111;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  padding: 15px 30px;
+}
+
+header .logo {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+header nav a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+header .icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+header .icons span,
+header .icons a {
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Container principal */
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 80px;
+  gap: 40px;
+}
+
+/* Carrinho */
+.cart {
+  flex: 2;
+}
+
+.cart h2 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.cart p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+#cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cart-item {
+  display: flex;
+  gap: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-details h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.cart-item-details p {
+  font-size: 14px;
+  color: #555;
+}
+
+.cart-item-details .price {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.cart-item-details .remove {
+  color: #000;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+/* Informações do pedido */
+.order-info {
+  margin-top: 30px;
+}
+
+.order-info h3 {
+  margin-bottom: 15px;
+}
+
+.accordion div {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Resumo do pedido */
+.summary {
+  flex: 1;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.summary h3 {
+  margin-bottom: 20px;
+}
+
+.summary input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.line.total {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 15px;
+}
+
+/* Botões */
+.summary a button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Hover nos botões */
+.summary a button:hover {
+  background-color: #333;
+}
+

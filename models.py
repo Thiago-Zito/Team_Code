@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, DECIMAL
+from sqlalchemy import Column, Integer, String, DECIMAL, ForeignKey
+from sqlalchemy.orm import relationship
 from Model.conexaoDB import SessionLocal, Base, engine
 from Model.auth import gerar_hash_senha
 
@@ -24,10 +25,23 @@ class Usuario(Base):
     email = Column(String(100), unique=True)
     senha = Column(String(200))
 
+    carrinho = relationship("Carrinho", back_populates="usuario")
+
+class Carrinho(Base):
+    __tablename__ = "Carrinho"
+
+    id = Column(Integer, primary_key=True, index=True)
+    id_usuario = Column(Integer, ForeignKey("usuarios.id"))
+    id_produto = Column(Integer, ForeignKey("Produtos.idProduto"))
+    quantidade = Column(Integer, default=1)
+
+    usuario = relationship("Usuario", back_populates="carrinho")
+    produto = relationship("Produto")
+
 # Criação das tabelas
 # Base.metadata.create_all(bind=engine)
 
-# Criação só da tabela usuarios
+# Criação de tabela específica
 # Usuario.__table__.create(bind=engine, checkfirst=True)
 
 # CRUD PARA PRODUTOS

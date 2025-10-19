@@ -69,7 +69,10 @@
       </div>
 
       <!-- Botão -->
-      <button class="btn-comprar">Adicionar ao carrinho</button>
+      <form action="/carrinho/adicionar/{{produto.id}}" method="post">
+        <button type="submit" class="btn-comprar">Adicionar ao carrinho</button>
+      </form>
+      <!-- <button class="btn-comprar">Adicionar ao carrinho</button> qnd apertar nesse botão terá que adicionar o produto (por meio do id) lá no carrinho.html e se eu entrar e sair de lá terá que estar lá até o usuario desidir deletar -->
 
       <!-- Links extras -->
       <div class="produto-links">

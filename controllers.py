@@ -6,7 +6,8 @@ from fastapi import APIRouter, Request, Form, UploadFile, File, Depends
 #File = Função para gravar caminho da imagem
 #Depends = Dependência do banco de dados sqlite #pip install python-multipart
 
-from fastapi.responses import HTMLResponse, RedirectResponse
+import json
+from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 # HTMLResponse = Resposta do html, get, post, put, delete
 #RedirectResponse = Redirecionar a resposta para o front
 
@@ -23,7 +24,7 @@ from sqlalchemy.orm import Session
 from Model.conexaoDB import get_db, SessionLocal
 #get_db = injeção do SessionLocal na API
 
-from models import Produto, Usuario
+from models import Produto, Usuario, Carrinho
 
 from Model.auth import gerar_hash_senha, verificar_senha, criar_token, verificar_token
 
@@ -125,3 +126,67 @@ async def cadastrar_usuario(
         db.commit()
         db.refresh(novo_usuario)
         return RedirectResponse(url='/', status_code=303)
+    
+# rotas para carrinho 
+@router.post("/carrinho/adicionar/{id_produto}")
+async def adicionar_carrinho(request: Request, id_produto: int, db: Session = Depends(get_db)):
+    # Verifica se o usuário está logado
+    token = request.cookies.get("token")
+    if not token:
+        return RedirectResponse(url="/login", status_code=303)
+    
+    payload = verificar_token(token)
+    if not payload:
+        return RedirectResponse(url="/login", status_code=303)
+
+    email_usuario = payload.get("sub")
+    usuario = db.query(Usuario).filter(Usuario.email == email_usuario).first()
+
+    produto = db.query(Produto).filter(Produto.id == id_produto).first()
+    if not produto:
+        return RedirectResponse(url="/", status_code=303)
+
+    # Verifica se o produto já está no carrinho
+    item_existente = db.query(Carrinho).filter(
+        Carrinho.id_usuario == usuario.id,
+        Carrinho.id_produto == produto.id
+    ).first()
+
+    if item_existente:
+        item_existente.quantidade += 1
+    else:
+        novo_item = Carrinho(id_usuario=usuario.id, id_produto=produto.id)
+        db.add(novo_item)
+
+    db.commit()
+    return RedirectResponse(url="/carrinho", status_code=303)
+
+# rota para visualizar o carrinho
+@router.get("/carrinho", response_class=HTMLResponse)
+async def ver_carrinho(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("token")
+    if not token:
+        return RedirectResponse(url="/login", status_code=303)
+
+    payload = verificar_token(token)
+    if not payload:
+        return RedirectResponse(url="/login", status_code=303)
+
+    email_usuario = payload.get("sub")
+    usuario = db.query(Usuario).filter(Usuario.email == email_usuario).first()
+
+    itens = db.query(Carrinho).filter(Carrinho.id_usuario == usuario.id).all()
+
+    return templates.TemplateResponse("carrinho.html", {
+        "request": request,
+        "itens": itens
+    })
+
+#rota para deletar o produto do carrinho
+@router.post("/carrinho/remover/{id_item}")
+async def remover_carrinho(request: Request, id_item: int, db: Session = Depends(get_db)):
+    item = db.query(Carrinho).filter(Carrinho.id == id_item).first()
+    if item:
+        db.delete(item)
+        db.commit()
+    return RedirectResponse(url="/carrinho", status_code=303)

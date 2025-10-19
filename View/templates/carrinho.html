@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrinho</title>
+  <link rel="stylesheet" href="style_carrinho.css">
+  <link rel="stylesheet" href="{{url_for('static', path='Pasta_css/style_carrinho.css') }}">
+</head>
+<body>
+
+<header>
+  <div class="logo"><strong>Ecommerce</strong></div>
+  <nav>
+    <a href="#">Loja</a>
+    <a href="#">Sobre</a>
+    <a href="#">Pesquisar</a>
+  </nav>
+  <div class="icons">
+      <span class="heart">❤</span>
+      <span class="cart">2</span>
+      <a href="#">Login</a>
+  </div>
+</header>
+
+<div class="container">
+  <div class="cart">
+    <h2>Seu Carrinho</h2>
+    <p>Confira seus pedidos e finalize a compra.</p>
+
+    <div id="cart-items"></div> 
+
+    <div class="order-info">
+      <h3>Informações do Pedido</h3>
+      <div class="accordion">
+        <div>Política de Devolução <span>+</span></div>
+        <div>Opções de Envio <span>+</span></div>
+        <div>Política de Pagamento <span>+</span></div>
+      </div>
+    </div>
+  </div>
+
+  {% if itens %}
+    {% for item in itens %}
+      <div class="summary">
+          <h3>Resumo do Pedido</h3>
+          <input type="text" placeholder="Código do Cupom">
+          <div class="line"><span>Subtotal</span><span id="subtotal">R$ {{ item.produto.preco }}</span></div>
+          <div class="line"><span>Quantidade</span><span>{{item.quantidade}}</span></div>
+          <div class="line total"><span>Total</span><span id="total">R$ {{ item.produto.preco }}</span></div>
+          <a href="#">Prosseguir com a compra</button>
+          <a href="#">Adicionar mais produtos</button>
+          <form action="/carrinho/remover/{{item.id}}" method="post">
+            <button type="submit" class="btn btn-danger">Remover</button>
+          </form>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Seu carrinho está vazio.</p>
+  {% endif %}
+</div>
+
+<!-- <script src="script.js"></script> -->
+</body>
+</html>
+
