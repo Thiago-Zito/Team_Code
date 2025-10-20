@@ -1,3 +1,5 @@
+/* filtros */
+
 * { 
     margin: 0;
     padding: 0;
@@ -122,29 +124,39 @@
 .item img {
   width: 100%;
   max-width: 200px;
-  height: 200px;       /* altura fixa para padronizar */
+  height: 220px;       /* altura fixa para padronizar */
   object-fit: contain; /* não distorce */
   margin: 0 auto 2px;  /* só 2px de margem embaixo */
   display: block;
 }
 
 .item h3 {
-  font-size: 14px;
+  font-size: 20px;
+  color: #000;
   margin: 0;  /* sem margem extra */
   line-height: 1.2; /* deixa o texto mais compacto */
+  transition: all 1s;
+}
+.item h3:hover{
+  color: #8a8383;
 }
 
 .item p {
-  font-size: 13px;
+  font-size: 16px;
+  padding: 5px;
   color: #333;
   margin: 0;  /* cola o preço no título */
   line-height: 1.2;
 }
 
+.item a {
+  text-decoration: none;
+}
+
 /* ------------------ Produto --------------------- */
 
 .categoria{
-  height: 800px;
+  height: 850px;
   width: 100%;
 }
 
@@ -170,14 +182,21 @@
   cursor: pointer;
 }
 
+.carregar_produtos{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .button_carregar_produtos {
-  display: block;             /* ocupa a linha inteira */
-  margin: 30px auto;          /* centraliza automaticamente */
+  text-decoration: none;
+  text-align: center;
   padding: 12px 34px;
-  background-color: #fff;     /* cor igual ao header/footer */
-  color: #000;
+  background-color: #000000;     /* cor igual ao header/footer */
+  color: #ffffff;
   border-radius: 1px;
   font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
   transition: all linear 0.3s;
   position: relative;
@@ -186,8 +205,7 @@
 
 .button_carregar_produtos:hover {
   background-color: #000;
-  color: #fff     
-  
+  color: #fff 
 }
 
 /* Filtros */
@@ -195,13 +213,15 @@
 .filtros {
   width: 220px;
   padding: 16px;
-  background: #f5f7fa;
+  background: #ffffff;
   font-family: Arial, sans-serif;
   font-size: 14px;
   color: #333;
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
+  position: relative;
+  top: 10rem;
+  left: 7rem;
 }
 
 .filtros-header {
@@ -212,7 +232,8 @@
 
 .filtros-header h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .limpar {

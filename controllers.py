@@ -57,13 +57,29 @@ async def listar(request: Request, offset: int = 0, limit: int = 6, categoria: s
         query = query.filter(Produto.categoria == categoria) 
         #como o filter() ñ altera o obj query original a gnt temq armazenar na variável, senão será ignorado
 
+    total_produtos = query.count()  # conta quantos produtos existem
+
+    # Se o offset for maior ou igual ao total, volta pro início
+    if offset >= total_produtos:
+        offset = 0 # restarta offset
+
     produtos = query.offset(offset).limit(limit).all()
+
+    # Calcula o próximo offset
+    proximo_offset = offset + limit
+
+    # Se o próximo offset passar do total, na próxima vez volta ao início
+    if proximo_offset >= total_produtos:
+        proximo_offset = 0
 
     if produtos:
         return templates.TemplateResponse('loja.html', {
-            'request': request, 'produtos': produtos, 'categoria': categoria, 'offset': offset, 'limit': limit})
-    else:
-        return HTMLResponse('<h2>Não há produtos nessa categoria.</h2>', status_code=200)
+            'request': request,
+            'produtos': produtos,
+            'categoria': categoria,
+            'offset': proximo_offset,  # devolve o offset para o próximo clique
+            'limit': limit
+        })
 
 #Rota para listar único produto
 @router.get('/produto/{id_produto}', response_class=HTMLResponse)
@@ -129,8 +145,12 @@ async def cadastrar_usuario(
     
 # rotas para carrinho 
 @router.post("/carrinho/adicionar/{id_produto}")
-async def adicionar_carrinho(request: Request, id_produto: int, db: Session = Depends(get_db)):
-    # Verifica se o usuário está logado
+async def adicionar_carrinho(
+    request: Request,
+    id_produto: int,
+    quantidade: int = Form(1),
+    db: Session = Depends(get_db)
+):
     token = request.cookies.get("token")
     if not token:
         return RedirectResponse(url="/login", status_code=303)
@@ -141,21 +161,19 @@ async def adicionar_carrinho(request: Request, id_produto: int, db: Session = De
 
     email_usuario = payload.get("sub")
     usuario = db.query(Usuario).filter(Usuario.email == email_usuario).first()
-
     produto = db.query(Produto).filter(Produto.id == id_produto).first()
     if not produto:
         return RedirectResponse(url="/", status_code=303)
 
-    # Verifica se o produto já está no carrinho
     item_existente = db.query(Carrinho).filter(
         Carrinho.id_usuario == usuario.id,
         Carrinho.id_produto == produto.id
     ).first()
 
     if item_existente:
-        item_existente.quantidade += 1
+        item_existente.quantidade += quantidade
     else:
-        novo_item = Carrinho(id_usuario=usuario.id, id_produto=produto.id)
+        novo_item = Carrinho(id_usuario=usuario.id, id_produto=produto.id, quantidade=quantidade)
         db.add(novo_item)
 
     db.commit()
