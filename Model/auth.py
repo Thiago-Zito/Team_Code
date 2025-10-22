@@ -3,7 +3,7 @@
 from datetime import datetime, timedelta
 #datetime = ano, mês, dia, hora, minuto, segundo
 #timedelta = adição ou subtração de tempo ou data
-from jose import JWSError, jwt
+from jose import JWSError, jwt, ExpiredSignatureError
 #JWTError = erro de criptografia
 #jwt = JSON web token = Assinatura criptografada entre duas partes
 from passlib.context import CryptContext

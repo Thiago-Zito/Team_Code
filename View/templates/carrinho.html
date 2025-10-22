@@ -5,22 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carrinho</title>
   <link rel="stylesheet" href="style_carrinho.css">
-  <link rel="stylesheet" href="{{url_for('static', path='Pasta_css/style_carrinho.css') }}">
+  <link rel="stylesheet" href="{{url_for('static', path='Pasta_css/style_carrinho2.css') }}">
 </head>
 <body>
 
-<header>
-  <div class="logo"><strong>Ecommerce</strong></div>
-  <nav>
-    <a href="#">Loja</a>
-    <a href="#">Sobre</a>
-    <a href="#">Pesquisar</a>
-  </nav>
-  <div class="icons">
-      <span class="heart">❤</span>
-      <span class="cart">2</span>
-      <a href="#">Login</a>
-  </div>
+<header id="container_header">
+            <div class="inline left-header">
+                <a href="/"><h2>Ecommerce</h2></a>
+                <a href="/produtos">Loja</a>
+                <a href="/sobre">Sobre</a>
+                <form action="">
+                    <label for="pesquisar"><img class="icones" src="/static/uploads/icons_header/lupa.png" alt=""></label>
+                    <input type="text" id="pesquisar" placeholder="Pesquisar">
+                </form>
+            </div>
+            <div class="inline right-header">
+                <a href=""><img src="/static/uploads/icons_header/coracao.png" alt=""></a>
+                <a href=""><img src="/static/uploads/icons_header/icon_carrinho.png" alt=""></a>
+                <a href="">Login</a>
+            </div>
 </header>
 
 <div class="container">
@@ -40,19 +43,21 @@
     </div>
   </div>
 
-  {% if itens %}
-    {% for item in itens %}
+  {% if carrinho %}
+    {% for item in carrinho %}
       <div class="summary">
           <h3>Resumo do Pedido</h3>
           <input type="text" placeholder="Código do Cupom">
-          <div class="line"><span>Subtotal</span><span id="subtotal">R$ {{ item.produto.preco }}</span></div>
-          <div class="line"><span>Quantidade</span><span>{{item.quantidade}}</span></div>
-          <div class="line total"><span>Total</span><span id="total">R$ {{ item.produto.preco }}</span></div>
-          <a href="#">Prosseguir com a compra</button>
-          <a href="#">Adicionar mais produtos</button>
-          <form action="/carrinho/remover/{{item.id}}" method="post">
-            <button type="submit" class="btn btn-danger">Remover</button>
+          <div class="line"><span>Subtotal</span><span id="subtotal">R$ {{ total }}</span></div>
+          <div class="line"><span>Quantidade</span><span>{{ item["quantidade"] }}</span></div>
+          <div class="line total"><span>Total</span><span id="total">R$ {{ total }}</span></div>
+          <form action="/checkout" method="post">
+            <button type="submit">Prosseguir com a compra</button>
           </form>
+          <a href="#">Adicionar mais produtos</a>
+          <!-- <form action="/carrinho/remover/{{item.id}}" method="post">
+            <button type="submit" class="btn btn-danger">Remover</button>
+          </form> -->
       </div>
     {% endfor %}
   {% else %}

@@ -1,15 +1,16 @@
-from sqlalchemy import Column, Integer, String, DECIMAL, ForeignKey
+from sqlalchemy import Column, Integer, String, DECIMAL, ForeignKey, Boolean, Float
 from sqlalchemy.orm import relationship
+from sqlalchemy import text
 from Model.conexaoDB import SessionLocal, Base, engine
 from Model.auth import gerar_hash_senha
 
 # ORM de produto
 class Produto(Base):
     __tablename__ = "Produtos"
-
     id = Column("idProduto", Integer, primary_key = True, nullable = False)
     nome = Column("Nome_Produto", String(100), nullable = False)
     preco = Column("Preço", DECIMAL, nullable = False)
+    quantidade = Column("quantidade", Integer, nullable=False)
     categoria = Column("Categoria", String(100), nullable = False)
     cor = Column("Cor", String(45), nullable = False)
     imagem = Column("Imagem", String(100), nullable=False)
@@ -24,19 +25,32 @@ class Usuario(Base):
     nome = Column(String(50))
     email = Column(String(100), unique=True)
     senha = Column(String(200))
+    is_admin = Column(Boolean, default=False)
 
-    carrinho = relationship("Carrinho", back_populates="usuario")
+    pedidos = relationship("Pedido", back_populates="usuario")
 
-class Carrinho(Base):
-    __tablename__ = "Carrinho"
-
+class Pedido(Base):
+    __tablename__ = "pedido"
     id = Column(Integer, primary_key=True, index=True)
-    id_usuario = Column(Integer, ForeignKey("usuarios.id"))
-    id_produto = Column(Integer, ForeignKey("Produtos.idProduto"))
-    quantidade = Column(Integer, default=1)
+    id_usuario = Column(Integer, ForeignKey("usuarios.id")) # id do usuário que está fazendo o pedido
+    total = Column(Float, default=0.0) # total de pedidos
 
-    usuario = relationship("Usuario", back_populates="carrinho")
-    produto = relationship("Produto")
+    usuario = relationship("Usuario", back_populates="pedidos")
+    itens = relationship("ItemPedido", back_populates="pedido")
+
+class ItemPedido(Base):
+    __tablename__ = "item_pedido"
+    id = Column(Integer, primary_key=True, index=True)
+    id_pedido = Column(Integer, ForeignKey("pedido.id"))
+    id_produto = Column(Integer, ForeignKey("Produtos.idProduto"))
+    quantidade = Column(Integer, default=1) 
+    preco_unitario = Column(Float)
+
+    pedido = relationship("Pedido", back_populates="itens")
+
+# with engine.connect() as conexao:
+#     conexao.execute(text(
+#         'ALTER TABLE Produtos ADD COLUMN quantidade'))
 
 # Criação das tabelas
 # Base.metadata.create_all(bind=engine)
@@ -118,11 +132,11 @@ def delete(id_produto:int):
 
 # CRUD PARA USUARIOS 
 # create
-def create_usuario(nome:str, email:str, senha:str):
+def create_usuario(nome:str, email:str, senha:str, is_admin:bool):
     session = SessionLocal()
-    usuario=Usuario(nome=nome, email=email, senha=senha)
+    usuario=Usuario(nome=nome, email=email, senha=senha, is_admin=is_admin)
     session.add(usuario)
     session.commit()
     session.close()
 
-# create_usuario("Fernando", "fe@gmail.com", gerar_hash_senha("minhasenha123"))
+# create_usuario("Fernando", "fernando@gmail.com", gerar_hash_senha("minhasenha123"), is_admin=True)

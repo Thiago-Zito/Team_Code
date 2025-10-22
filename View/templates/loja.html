@@ -42,18 +42,6 @@
             </div>
 
             <div class="produtos">
-                <div class="barra-opcoes">
-                    <div class="ordenar">
-                        <select id="ordenar" name="ordenar">
-                            <option value="popular">Ordenar: Popular</option>
-                            <option value="preco-menor">Preço: menor → maior</option>
-                            <option value="preco-maior">Preço: maior → menor</option>
-                            <option value="novidades">Novidades</option>
-                        </select>
-                        <span class="info">Mostrando 1003 Produtos</span>
-                    </div>
-                    
-                </div>
                 <div class="categoria">
                     
                     <!-- Filtros -->
@@ -110,9 +98,11 @@
                             </div>
                         {%endfor%}
                     </div>
-                    {% if produtos %}
-                      <a href="/produtos?offset={{ offset + limit }}&limit={{ limit }}{% if categoria %}&categoria={{ categoria }}{% endif %}" class="button_carregar_produtos">Carregar Mais Produtos</a>
-                    {% endif %}
+                    <div class="carregar_produtos">
+                        {% if produtos %}
+                            <a href="/produtos?offset={{ offset + limit }}&limit={{ limit }}{% if categoria %}&categoria={{ categoria }}{% endif %}" class="button_carregar_produtos">Carregar Mais Produtos</a>
+                        {% endif %}
+                    </div>
             </div>
         </section>
         
