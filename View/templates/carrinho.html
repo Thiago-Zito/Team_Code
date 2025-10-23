@@ -44,7 +44,7 @@
   </div>
 
   {% if carrinho %}
-    {% for item in carrinho %}
+    <!-- {% for item in carrinho %} -->
       <div class="summary">
           <h3>Resumo do Pedido</h3>
           <input type="text" placeholder="Código do Cupom">
@@ -54,17 +54,16 @@
           <form action="/checkout" method="post">
             <button type="submit">Prosseguir com a compra</button>
           </form>
-          <a href="#">Adicionar mais produtos</a>
           <!-- <form action="/carrinho/remover/{{item.id}}" method="post">
             <button type="submit" class="btn btn-danger">Remover</button>
           </form> -->
       </div>
-    {% endfor %}
+    <!-- {% endfor %} -->
   {% else %}
     <p>Seu carrinho está vazio.</p>
   {% endif %}
 </div>
-
+<script src="{{ url_for('static', path='js/carrinho.js') }}"></script>
 <!-- <script src="script.js"></script> -->
 </body>
 </html>

@@ -85,8 +85,19 @@ async def listar(request: Request, offset: int = 0, limit: int = 6, categoria: s
 async def detalhe(request:Request, id_produto:int, db:Session=Depends(get_db)):
     produto = db.query(Produto).filter(Produto.id == id_produto).first()
     
+    token = request.cookies.get("token")
+    carrinho = []
+    if token:
+        payload = verificar_token(token)
+        if payload:
+            email_usuario = payload.get("sub")
+            usuario = db.query(Usuario).filter(Usuario.email == email_usuario).first()
+            carrinho = carrinhos.get(usuario.id, [])
+    
     return templates.TemplateResponse('produto.html', {
-        'request':request, 'produto':produto
+        'request': request,
+        'produto': produto,
+        'carrinho': carrinho
     })
 
 #Rota para mostrar página sobre
@@ -140,7 +151,7 @@ async def cadastrar_usuario(
         db.add(novo_usuario)
         db.commit()
         db.refresh(novo_usuario)
-        return RedirectResponse(url='/produtos', status_code=303)
+        return RedirectResponse(url='/login', status_code=303)
 
 #carrinho simples em memória
 #adicionar itens ao carrinho
@@ -169,6 +180,10 @@ async def adicionar_carrinho(
         return RedirectResponse(url="/", status_code=303)
 
     carrinho=carrinhos.get(usuario.id,[])
+    if len(carrinho) >= 1:
+        # se já houver item, redireciona direto para o carrinho
+        return RedirectResponse(url="/carrinho", status_code=303)
+    
     carrinho.append({
         "id":produto.id,
         "nome":produto.nome,
@@ -272,8 +287,34 @@ def meus_pedidos(request:Request,db:Session=Depends(get_db)):
     email_usuario = payload.get("sub")
     usuario=db.query(Usuario).filter_by(email=email_usuario).first()
     pedidos = db.query(Pedido).filter_by(id_usuario=usuario.id).all()
-    return templates.TemplateResponse("meus_pedidos.html",
-                                      {"request":request, "pedidos":pedidos})
+    
+    total_geral = sum(p.total for p in pedidos)
+    
+    return templates.TemplateResponse("checkout.html",
+                                      {"request":request, "pedidos":pedidos, "total_geral":total_geral})
+    
+@router.get("/api/contador-carrinho")
+def contador_carrinho(db: Session = Depends(get_db), request: Request = None):
+    token = request.cookies.get("token")
+    payload = verificar_token(token)
+    if not payload:
+        return {"quantidade": 0}
+
+    email = payload.get("sub")
+    usuario = db.query(Usuario).filter_by(email=email).first()
+    if not usuario:
+        return {"quantidade": 0}
+
+    # Contar todos os produtos nos pedidos desse usuário
+    pedidos = db.query(Pedido).filter_by(id_usuario=usuario.id).all()
+
+    quantidade_total = 0
+    for pedido in pedidos:
+        itens = db.query(ItemPedido).filter_by(id_pedido=pedido.id).all()
+        quantidade_total += sum(i.quantidade for i in itens)
+
+    return {"quantidade": quantidade_total}
+
 # #rota para deletar o produto do carrinho
 # @router.post("/carrinho/remover/{id_item}")
 # async def remover_carrinho(request: Request, id_item: int, db: Session = Depends(get_db)):

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - Ecommerce</title>
+    <link rel="stylesheet" href="style_checkout.css" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', path='Pasta_css/style_checkout.css') }}"
+    />
+    <!-- FONTE PADRÃO DO SITE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo">Ecommerce</div>
+
+      <nav class="menu">
+        <a href="#">Loja</a>
+        <a href="#">Sobre</a>
+        <a href="#">Pesquisar</a>
+      </nav>
+
+      <div class="icons">
+        <span class="heart">❤</span>
+        <span class="cart">2</span>
+        <a href="#">Login</a>
+      </div>
+    </header>
+
+    <main class="checkout">
+      <section class="form-section">
+        <h1>Checkout</h1>
+        <div class="steps">
+          <strong>Endereço</strong> <span>——</span> Envio
+          <span>——</span> Pagamento
+        </div>
+
+        <h3>Informações de envio</h3>
+        <form>
+          <div class="row">
+            <input type="text" placeholder="Primeiro Nome" />
+            <input type="text" placeholder="Segundo Nome" />
+          </div>
+          <input type="text" placeholder="Endereço" />
+          <input type="text" placeholder="Apartamento, suite, etc (opcional)" />
+          <input type="text" placeholder="Rua" />
+          <div class="row">
+            <input type="text" placeholder="País" />
+            <select>
+              <option>Cidade</option>
+              <option>São Paulo</option>
+              <option>Rio de Janeiro</option>
+              <option>Brasília</option>
+            </select>
+            <input type="text" placeholder="CEP" />
+          </div>
+          <input type="text" placeholder="Opcional" />
+          <label>
+            <input type="checkbox" /> Salvar informações de contato
+          </label>
+          <a href="index(Entrega).html" class="botao-continuar"
+            >Continuar para envio</a
+          >
+        </form>
+      </section>
+
+      {% if pedidos %}
+      <aside class="cart-section">
+        <h3>Seu produto</h3>
+        {% for i in pedidos %}
+        <input type="text" placeholder="Insira o código do cupom aqui" />
+        <div class="summary">
+          <p>Pedido <span>{{i.id}}</span></p>
+          <p>Nome <span>{{i.nome}}</span></p>
+          <p>
+            <strong>Total</strong>
+            <span><strong>{{ i.total }}</strong></span>
+          </p>
+        </div>
+        {% endfor %}
+        <p>Subtotal <span>R$ {{ total_geral }}</span></p>
+      </aside>
+      {% endif %}
+    </main>
+    <script src="{{ url_for('static', path='js/carrinho.js') }}"></script>
+  </body>
+</html>

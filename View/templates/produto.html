@@ -33,26 +33,17 @@
           <a href="loja.html">Loja</a>
           <a href="">Sobre</a>
           <form action="">
-<<<<<<< HEAD
-            <label for="pesquisar"><img class="icones" src="/static/uploads/icons_header/lupa.png" alt=""/></label>
-=======
             <label for="pesquisar"
               ><img class="icones" src="./img/icons_header/lupa.png" alt=""
             /></label>
->>>>>>> 22556c059a8e0fde7081a13e8a249ea3670333a4
             <input type="text" id="pesquisar" placeholder="Pesquisar" />
           </form>
         </div>
         <div class="inline right-header">
-<<<<<<< HEAD
-          <a href=""><img src="/static/uploads/icons_header/coracao.png" alt="" /></a>
-          <a href=""><img src="/static/uploads/icons_header/icon_carrinho.png" alt="" /></a>
-=======
           <a href=""><img src="./img/icons_header/coracao.png" alt="" /></a>
           <a href=""
             ><img src="./img/icons_header/icon_carrinho.png" alt=""
           /></a>
->>>>>>> 22556c059a8e0fde7081a13e8a249ea3670333a4
           <a href="">Login</a>
         </div>
       </header>
@@ -109,6 +100,7 @@
           </div>
 
           <!-- Botão -->
+        {% if not carrinho %}
           <form
             id="form-carrinho"
             action="/carrinho/adicionar/{{produto.id}}"
@@ -120,10 +112,15 @@
               id="quantidade-hidden"
               value="1"
             />
-            <button type="submit" class="btn-comprar">
-              Adicionar ao carrinho
-            </button>
+            <button type="submit" class="btn-comprar">Adicionar ao carrinho</button>
           </form>
+        {% else %}
+          <p style="color: #333; margin-top: 20px;">
+            Você já tem um item no carrinho.<br>
+            <a style="padding: 10px;" href="/carrinho" class="btn btn-dark mt-2">Ir para o carrinho</a>
+          </p>
+        {% endif %}
+
           <!-- <button class="btn-comprar">Adicionar ao carrinho</button> qnd apertar nesse botão terá que adicionar o produto (por meio do id) lá no carrinho.html e se eu entrar e sair de lá terá que estar lá até o usuario desidir deletar -->
 
           <!-- Links extras -->
@@ -157,5 +154,6 @@
         }
       });
     </script>
+    <script src="{{ url_for('static', path='js/carrinho.js') }}"></script>
   </body>
 </html>
