@@ -316,10 +316,10 @@ def contador_carrinho(db: Session = Depends(get_db), request: Request = None):
     return {"quantidade": quantidade_total}
 
 # #rota para deletar o produto do carrinho
-# @router.post("/carrinho/remover/{id_item}")
-# async def remover_carrinho(request: Request, id_item: int, db: Session = Depends(get_db)):
-#     item = db.query(Carrinho).filter(Carrinho.id == id_item).first()
-#     if item:
-#         db.delete(item)
-#         db.commit()
-#         return RedirectResponse(url="/carrinho", status_code=303)
+@router.post("/carrinho/remover/{id_item}")
+async def remover_carrinho(request: Request, id_item: int, db: Session = Depends(get_db)):
+    item = db.query(Pedido).filter(Pedido.id == id_item).first()
+    if item:
+        db.delete(item)
+        db.commit()
+        return RedirectResponse(url="/produtos", status_code=303)

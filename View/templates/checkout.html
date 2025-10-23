@@ -22,7 +22,7 @@
       <div class="logo">Ecommerce</div>
 
       <nav class="menu">
-        <a href="#">Loja</a>
+        <a href="/produtos">Loja</a>
         <a href="#">Sobre</a>
         <a href="#">Pesquisar</a>
       </nav>
@@ -83,6 +83,9 @@
             <strong>Total</strong>
             <span><strong>{{ i.total }}</strong></span>
           </p>
+          <form action="/carrinho/remover/{{i.id}}" method="post">
+            <button type="submit">remover o pedido</button>
+          </form>
         </div>
         {% endfor %}
         <p>Subtotal <span>R$ {{ total_geral }}</span></p>
