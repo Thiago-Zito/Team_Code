@@ -32,11 +32,10 @@ from Model.auth import gerar_hash_senha, verificar_senha, criar_token, verificar
 router = APIRouter() #Rotas
 templates = Jinja2Templates(directory='./View/templates') #Front-end
 
-# Pasta para salvar imagens
-UPLOAD_DIR = '/static/uploads'
+# Caminho da pasta de uploads
+UPLOAD_DIR = "static/uploads"  # sem a barra inicial
 
-#caminho para o os
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+os.makedirs(UPLOAD_DIR, exist_ok=True)  # cria a pasta se não existir)
 
 #Rota para mostrar página home
 @router.get('/', response_class=HTMLResponse)
@@ -114,22 +113,102 @@ async def login(request:Request):
         'request':request
     })
 
-#verificar se o usuário existe
-@router.post('/login')
-async def login(request:Request, 
-                email:str = Form(...), 
-                senha:str = Form(...),
-                db:Session = Depends(get_db)
-                ):
+# ----- Login -----
+
+@router.post("/login")
+async def login(
+    request: Request,
+    email: str = Form(...),
+    senha: str = Form(...),
+    db: Session = Depends(get_db)
+):
     usuario = db.query(Usuario).filter(Usuario.email == email).first()
-    if not usuario or not verificar_senha(senha, usuario.senha):
-        return {'mensagem':'Credenciais inválidas'}
+    if not usuario:
+        return JSONResponse({"mensagem": "Usuário não encontrado."}, status_code=401)
+
+    try:
+        if not verificar_senha(senha, usuario.senha):
+            return JSONResponse({"mensagem": "Senha incorreta."}, status_code=401)
+    except Exception as e:
+        print(f"Erro ao verificar senha para {email}: {e}")
+        return JSONResponse({"mensagem": "Erro ao verificar senha. Tente redefinir sua senha."},status_code=500)
+
+    if usuario.is_admin:
+        token = criar_token({"sub": usuario.email, "is_admin": True})
+        destino = "/admin"
     else:
-        token = criar_token({'sub':usuario.email})
-        response = RedirectResponse(url='/produtos',status_code=303)
-        response.set_cookie(key='token', value=token, httponly=True)
-        return response
+        token = criar_token({"sub": usuario.email})
+        destino = "/me/produtos"
+
+    response = RedirectResponse(url=destino, status_code=302)
+    response.set_cookie(key="token",value=token,httponly=True)
+    return response
+
+# -----   -----
+
+# ----- User Produtos -----
+
+@router.get('/me/produtos', response_class=HTMLResponse)
+async def listar_produtos_user(request: Request, offset: int = 0, limit: int = 6, db: Session = Depends(get_db)):
+    produtos = db.query(Produto).offset(offset).limit(limit).all()
+    total_produtos = db.query(Produto).count()
+    proximo_offset = offset + limit if offset + limit < total_produtos else 0
+
+    return templates.TemplateResponse('loja-user.html', {
+        'request': request,
+        'produtos': produtos,
+        'offset': proximo_offset,
+        'limit': limit
+    })
+
+# -----   -----
+
+# ----- Dados user -----
+@router.get("/me/dados", response_class=HTMLResponse)
+def listar_dados(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("token")
+    if not token:
+        return RedirectResponse(url="/login", status_code=303)
+    payload = verificar_token(token)
+    if not payload:
+        return RedirectResponse(url="/login", status_code=303)
     
+    email = payload.get("sub")
+    usuario = db.query(Usuario).filter(Usuario.email == email).first()
+    
+    return templates.TemplateResponse('dados.html', {
+        'request': request,
+        'user': usuario
+    })
+# -----   -----
+
+# ----- User Pedidos -----
+
+@router.get('/me/pedidos', response_class=HTMLResponse)
+def listar_pedidos(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("token")
+    if not token:
+        return RedirectResponse(url="/login", status_code=303)
+
+    payload = verificar_token(token)
+    if not payload:
+        return RedirectResponse(url="/login", status_code=303)
+
+    email_usuario = payload.get("sub")
+    usuario = db.query(Usuario).filter(Usuario.email == email_usuario).first()
+    if not usuario:
+        return RedirectResponse(url="/login", status_code=303)
+
+    # Busca apenas os pedidos desse usuário
+    pedidos = db.query(Pedido).filter(Pedido.id_usuario == usuario.id).all()
+
+    return templates.TemplateResponse(
+        'meus-pedidos.html',
+        {'request': request, 'pedidos': pedidos}
+    )
+
+# -----   -----
+
 #Rota para mostrar página cadastro
 @router.get('/register', response_class=HTMLResponse)
 async def cadastro(request:Request):
@@ -323,3 +402,84 @@ async def remover_carrinho(request: Request, id_item: int, db: Session = Depends
         db.delete(item)
         db.commit()
         return RedirectResponse(url="/produtos", status_code=303)
+
+
+# ----- Página Admin -----
+
+@router.get("/admin")
+def admin(request: Request, db: Session = Depends(get_db)):
+    return templates.TemplateResponse("admin.html", {"request": request})
+
+# -----   -----
+
+# ----- Página Admin Produto -----
+
+@router.get('/admin/produto', response_class=HTMLResponse)
+async def listar_admin(request:Request):
+    return templates.TemplateResponse('admin-produto.html', {'request':request})
+
+# -----   -----
+
+# ----- Página Admin Produto Deletar -----
+
+@router.get('/admin/produto-deletar', response_class=HTMLResponse)
+async def listar_admin_produto_deletar(request:Request, db:Session=Depends(get_db)):
+    produtos = db.query(Produto).all()
+    return templates.TemplateResponse('admin-produto-deletar.html', {
+        'request': request,
+        'produtos': produtos
+    })
+
+# -----   -----
+@router.post("/admin/produto")
+def criar_produto(
+    request:Request,
+    nome:str=Form(...),
+    preco:float=Form(...),
+    quantidade:int=Form(...),
+    categoria:str=Form(...),
+    cor:str=Form(...),
+    imagem:UploadFile=File(...),
+    detalhe1: UploadFile | None = File(None),
+    detalhe2: UploadFile | None = File(None),
+    detalhe3: UploadFile | None = File(None),
+    detalhe4: UploadFile | None = File(None),
+    db:Session=Depends(get_db)
+):
+    # Gera caminho completo para salvar a imagem principal
+    caminho_arquivo = os.path.join(UPLOAD_DIR, imagem.filename)
+
+    # Salva o arquivo
+    with open(caminho_arquivo, "wb") as arquivo:
+        shutil.copyfileobj(imagem.file, arquivo)
+        
+    novo_produto = Produto(
+        nome=nome,
+        preco=preco,
+        quantidade=quantidade,
+        categoria=categoria,
+        cor=cor,
+        imagem=imagem.filename,
+        detalhe1=detalhe1.filename if detalhe1 else "",
+        detalhe2=detalhe2.filename if detalhe2 else "",
+        detalhe3=detalhe3.filename if detalhe3 else "",
+        detalhe4=detalhe4.filename if detalhe4 else ""
+    )
+    db.add(novo_produto)
+    db.commit()
+    db.refresh(novo_produto)
+    return RedirectResponse(url="/admin/produto",status_code=303)
+
+@router.post("/admin/produto-deletar/{id}")
+def deletar_produto(id:int,db:Session=Depends(get_db)):
+    produto=db.query(Produto).filter(Produto.id==id).first()
+    if produto:
+        db.delete(produto)
+        db.commit()
+    return RedirectResponse(url="/admin/produto-deletar",status_code=303)
+
+@router.get("/logout")
+def logout():
+    response = RedirectResponse(url="/produtos", status_code=302)
+    response.delete_cookie(key="token")
+    return response

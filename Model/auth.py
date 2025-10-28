@@ -15,7 +15,7 @@ ALGORITHM = 'HS256' #Algoritmo de criptografia de 256 bits que vai criar um hash
 ACCESS_TOKEN_MINUTES = 30 #Token de 30 minutos
 
 #Criptografia de senha
-pwd_context = CryptContext(schemes=['bcrypt'], deprecated = 'auto')
+pwd_context = CryptContext(schemes=['argon2'], deprecated = 'auto')
 
 #Função criar o hash da senha
 def gerar_hash_senha(senha:str):

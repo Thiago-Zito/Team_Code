@@ -6,64 +6,58 @@ from Model.auth import gerar_hash_senha
 
 # ORM de produto
 class Produto(Base):
-    __tablename__ = "Produtos"
-    id = Column("idProduto", Integer, primary_key = True, nullable = False)
-    nome = Column("Nome_Produto", String(100), nullable = False)
-    preco = Column("Preço", DECIMAL, nullable = False)
+    __tablename__ = "produtos"
+
+    id = Column("id_produto", Integer, primary_key = True, nullable = False)
+    nome = Column("nome_produto", String(100), nullable = False)
+    preco = Column("preco", DECIMAL, nullable = False)
     quantidade = Column("quantidade", Integer, nullable=False)
-    categoria = Column("Categoria", String(100), nullable = False)
-    cor = Column("Cor", String(45), nullable = False)
-    imagem = Column("Imagem", String(100), nullable=False)
-    detalhe1 = Column("Detalhe1", String(100), nullable=False)
-    detalhe2 = Column("Detalhe2", String(100), nullable=False)
-    detalhe3 = Column("Detalhe3", String(100), nullable=False)
-    detalhe4 = Column("Detalhe4", String(100), nullable=False)
+    categoria = Column("categoria", String(100))
+    cor = Column("cor", String(45))
+    
+    # --- Imagens ---
+    imagem = Column("imagem", String(100), nullable=False)
+    detalhe1 = Column("Detalhe1", String(100))
+    detalhe2 = Column("Detalhe2", String(100))
+    detalhe3 = Column("Detalhe3", String(100))
+    detalhe4 = Column("Detalhe4", String(100))
 
 class Usuario(Base):
     __tablename__ = 'usuarios'
-    id = Column(Integer, primary_key=True, index=True)
-    nome = Column(String(50))
-    email = Column(String(100), unique=True)
-    senha = Column(String(200))
-    is_admin = Column(Boolean, default=False)
+    id = Column("id", Integer, primary_key=True, index=True)
+    nome = Column("nome" ,String(50))
+    email = Column("email", String(100), unique=True)
+    senha = Column("senha", String(200))
+    is_admin = Column("is_admin", Boolean, default=False)
 
     pedidos = relationship("Pedido", back_populates="usuario")
 
 class Pedido(Base):
-    __tablename__ = "pedido"
-    id = Column(Integer, primary_key=True, index=True)
-    id_usuario = Column(Integer, ForeignKey("usuarios.id")) # id do usuário que está fazendo o pedido
-    total = Column(Float, default=0.0) # total de pedidos
+    __tablename__ = "pedidos"
+    id = Column("id", Integer, primary_key=True, index=True)
+    id_usuario = Column("id_usuario", Integer, ForeignKey("usuarios.id")) # id do usuário que está fazendo o pedido
+    total = Column("total", Float, default=0.0) # total de pedidos
 
     usuario = relationship("Usuario", back_populates="pedidos")
     itens = relationship("ItemPedido", back_populates="pedido")
 
 class ItemPedido(Base):
-    __tablename__ = "item_pedido"
-    id = Column(Integer, primary_key=True, index=True)
-    id_pedido = Column(Integer, ForeignKey("pedido.id"))
-    id_produto = Column(Integer, ForeignKey("Produtos.idProduto"))
-    quantidade = Column(Integer, default=1) 
-    preco_unitario = Column(Float)
+    __tablename__ = "item_pedidos"
+    id = Column("id", Integer, primary_key=True, index=True)
+    id_pedido = Column("id_pedido", Integer, ForeignKey("pedidos.id"))
+    id_produto = Column("id_produto", Integer, ForeignKey("produtos.id_produto"))
+    quantidade = Column("quantidade", Integer, default=1) 
+    preco_unitario = Column("preco_unitario", Float)
 
     pedido = relationship("Pedido", back_populates="itens")
 
-# with engine.connect() as conexao:
-#     conexao.execute(text(
-#         'ALTER TABLE Produtos ADD COLUMN quantidade'))
-
-# Criação das tabelas
-# Base.metadata.create_all(bind=engine)
-
-# Criação de tabela específica
-# Usuario.__table__.create(bind=engine, checkfirst=True)
 
 # CRUD PARA PRODUTOS
 # CREATE
-def create(nome:str, preco:float, categoria:str, cor:str, imagem:str, detalhe1:str, detalhe2:str, detalhe3:str, detalhe4:str):
+def create(nome:str, preco:float, quantidade:int, categoria:str, cor:str, imagem:str, detalhe1:str, detalhe2:str, detalhe3:str, detalhe4:str):
     session = SessionLocal()
-    usuario=Produto(nome=nome, preco=preco, categoria=categoria, cor=cor, imagem=imagem, detalhe1=detalhe1, detalhe2=detalhe2, detalhe3=detalhe3, detalhe4=detalhe4)
-    session.add(usuario)
+    produto=Produto(nome=nome, preco=preco, quantidade=quantidade, categoria=categoria, cor=cor, imagem=imagem, detalhe1=detalhe1, detalhe2=detalhe2, detalhe3=detalhe3, detalhe4=detalhe4)
+    session.add(produto)
     session.commit()
     session.close()
 
@@ -100,35 +94,6 @@ def delete(id_produto:int):
         session.commit()
     session.close()
 
-# teste criar
-# create("Bolsa Auxiliar",
-# 7600.000,
-# "Tote",
-# "marrom",
-# "louis-vuitton-bolsa-carryall-vibe-mm-1.avif",
-# "louis-vuitton-bolsa-carryall-vibe3.avif",
-# "louis-vuitton-bolsa-carryall-vibe3.avif",
-# "louis-vuitton-bolsa-carryall-vibe3.avif",
-# "louis-vuitton-bolsa-carryall-vibe3.avif")
-
-# teste ler 
-# produtos = read()
-# print(produtos)
-
-# teste atualizar
-# update(5,
-# "Bolsa Legítima",
-# 3.14,
-# "Church",
-# "Azul",
-# "louis-vuitton-bolsa-carryall-vibe1.avif",
-# "louis-vuitton-bolsa-carryall-vibe2.avif",
-# "louis-vuitton-bolsa-carryall-vibe2.avif",
-# "louis-vuitton-bolsa-carryall-vibe2.avif",
-# "louis-vuitton-bolsa-carryall-vibe2.avif")
-
-# teste deletar
-# delete(25)
 
 # CRUD PARA USUARIOS 
 # create
@@ -139,4 +104,10 @@ def create_usuario(nome:str, email:str, senha:str, is_admin:bool):
     session.commit()
     session.close()
 
-# create_usuario("Fernando", "fernando@gmail.com", gerar_hash_senha("minhasenha123"), is_admin=True)
+# Criação das tabelas
+# Base.metadata.create_all(bind=engine)
+
+# teste criar
+# create("Bolsa Auxiliar", 7600.000, 10, "Tote", "marrom", "louis-vuitton-bolsa-carryall-vibe-mm-1.avif", "louis-vuitton-bolsa-carryall-vibe3.avif", "louis-vuitton-bolsa-carryall-vibe3.avif", "louis-vuitton-bolsa-carryall-vibe3.avif", "louis-vuitton-bolsa-carryall-vibe3.avif")
+# create_usuario("kaua", "kaua@gmail.com", gerar_hash_senha("123"), is_admin=True)
+# create_usuario("kaua", "kauarp.rodrigues@gmail.com", gerar_hash_senha("123"), is_admin=False)
