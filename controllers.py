@@ -191,10 +191,12 @@ def listar_dados(request: Request, db: Session = Depends(get_db)):
     
     email = payload.get("sub")
     usuario = db.query(Usuario).filter(Usuario.email == email).first()
+    admin = db.query(Usuario).filter(Usuario.is_admin)
     
     return templates.TemplateResponse('dados.html', {
         'request': request,
-        'user': usuario
+        'user': usuario,
+        'admin': admin
     })
 # -----   -----
 
@@ -219,7 +221,7 @@ def listar_pedidos(request: Request, db: Session = Depends(get_db)):
     pedidos = db.query(Pedido).filter(Pedido.id_usuario == usuario.id).all()
 
     return templates.TemplateResponse(
-        'meus-pedidos.html',
+        'checkout.html',
         {'request': request, 'pedidos': pedidos}
     )
 

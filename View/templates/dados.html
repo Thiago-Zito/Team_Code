@@ -11,6 +11,9 @@
         <p><strong>ID:</strong> {{ user.id }}</p>
         <p><strong>Nome:</strong> {{ user.nome }}</p>
         <p><strong>Email:</strong> {{ user.email }}</p>
+        {% if admin %}
+            <p><strong>administrador:</strong>{{ user.is_admin }}</p>
+        {% endif %}
     </div>
     <a href="/me/produtos">Voltar</a>
 </body>
