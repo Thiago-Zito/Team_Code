@@ -25,13 +25,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     carrinhoIcon.style.transition = "transform 0.4s ease";
     carrinhoIcon.style.transform = "rotate(-15deg)";
     setTimeout(() => (carrinhoIcon.style.transform = "rotate(0deg)"), 400);
-
   } catch (error) {
     console.error("Erro ao buscar contador do carrinho:", error);
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   const cepInput = document.querySelector('input[name="cep"]');
   const estadoSelect = document.querySelector('select[name="estado"]');
   const bairroInput = document.querySelector('input[name="bairro"]');
@@ -39,10 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Usar name para o endereço evita pegar o input errado
   const enderecoInput = document.querySelector('input[name="endereco"]');
 
-  cepInput.addEventListener('blur', async () => {
-    const cep = cepInput.value.replace(/\D/g, '');
+  cepInput.addEventListener("blur", async () => {
+    const cep = cepInput.value.replace(/\D/g, "");
     if (cep.length !== 8) {
-      alert('CEP inválido!');
+      alert("CEP inválido!");
       return;
     }
 
@@ -51,16 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = await response.json();
 
       if (data.erro) {
-        alert('CEP não encontrado!');
+        alert("CEP não encontrado!");
         return;
       }
 
-      bairroInput.value = data.bairro || '';
-      logradouroInput.value = data.logradouro || '';
+      bairroInput.value = data.bairro || "";
+      logradouroInput.value = data.logradouro || "";
       if (data.uf) estadoSelect.value = data.uf;
       enderecoInput.value = `${cep} - ${data.uf}, ${data.bairro}, ${data.logradouro}`;
     } catch (error) {
-      console.error('Erro ao consultar CEP:', error);
+      console.error("Erro ao consultar CEP:", error);
     }
   });
 });

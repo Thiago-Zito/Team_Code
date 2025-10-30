@@ -37,6 +37,17 @@ UPLOAD_DIR = "static/uploads"  # sem a barra inicial
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)  # cria a pasta se não existir)
 
+def verificando_token(request: Request):
+    token = request.cookies.get("token")
+    if not token:
+        return False
+    
+    payload = verificar_token(token)
+    if not payload:
+        return False
+    
+    return True
+
 #Rota para mostrar página home
 @router.get('/', response_class=HTMLResponse)
 async def listar_home(request:Request):
@@ -49,8 +60,13 @@ async def listar_home(request:Request):
 #Rota para listar produtos na loja.html
 @router.get('/produtos', response_class=HTMLResponse)
 async def listar(request: Request, offset: int = 0, limit: int = 6, categoria: str = None, db: Session = Depends(get_db)):
+    payload = verificando_token(request)
+    if payload:
+        return RedirectResponse(url="/me/produtos", status_code=303)
+
     query = db.query(Produto) # consultar todos os produtos / economizar linha
 
+    
     if categoria:
         query = query.filter(Produto.categoria == categoria) 
         #como o filter() ñ altera o obj query original a gnt temq armazenar na variável, senão será ignorado
