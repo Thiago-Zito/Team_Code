@@ -12,7 +12,7 @@
     width: 100%;
     height: 80px;         /* altura fixa do header */
     padding: 15px;
-    background-color: #000;
+    background-color: #000000;
     border-bottom: 1px solid #fff;
 }
 
@@ -56,11 +56,12 @@
 /* bloco da direita */
 .right-header {
     position: absolute;
-    top: 25px;
+    top: 20px;
     right: 80px;  /* você pode mudar esse valor */
     display: flex;
     align-items: center;
     gap: 20px;
+    
 }
 
 .right-header form input {
@@ -77,6 +78,51 @@
 .icones {
     width: 25px;
 }
+
+#foto-perfil {
+  margin-left: 15px;
+  width: 40px;
+  border-radius: 50%;       
+  object-fit: cover;        
+  transition: box-shadow 0.5s ease;
+}
+
+#foto-perfil:hover {
+  box-shadow: 0 0 0 5px #ffffff;
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+}
+
+.perfil-menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Menu pop-up */
+.popup-menu {
+    display: none; /* escondido por padrão */
+    position: absolute;
+    right: 0; /* alinha à direita da foto de perfil */
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    z-index: 10;
+}
+
+/* Links do menu */
+.popup-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Hover nos links */
+.popup-menu a:hover {
+    background-color: #f1f1f1;
+}
+
 
 /* --------------------- Fundo preto --------------------------*/
 .titulo {
@@ -272,3 +318,123 @@
   display: inline-block;
   cursor: pointer;
 }
+
+/* ------------------- Footer ------------------- */
+.footer-newsletter {
+  background-color: #000;
+  color: #fff;
+  padding: 60px 20px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.newsletter-section {
+  flex: 1 1 300px;
+}
+
+.newsletter-section h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.newsletter-section p {
+  font-size: 16px;
+  opacity: 0.8;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.newsletter-form input {
+  flex: 1 1 250px;
+  padding: 12px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
+}
+
+.newsletter-form input::placeholder {
+  color: #aaa;
+}
+
+.newsletter-form button {
+  padding: 12px 20px;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.newsletter-form button:hover {
+  background-color: #e6e6e6;
+}
+
+/* Footer links */
+.footer-links {
+  display: flex;
+  gap: 50px;
+  flex: 2 1 500px;
+  flex-wrap: wrap;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 150px;
+}
+
+.footer-column h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.footer-column a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.footer-column a:hover {
+  color: #fff;
+}
+
+
+/*  */
+
+.carrinho-icon {
+  position: relative;
+  display: inline-block;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #ff4747;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 20px;
+  text-align: center;
+}
+

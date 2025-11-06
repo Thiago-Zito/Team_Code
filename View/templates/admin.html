@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="{{url_for('static', path='Pasta_css/style_admin.css') }}"
+      href="{{url_for('static', path='Pasta_css/stytle_loja-user.css') }}"
     />
     <!-- bootstrap -->
     <link
@@ -41,14 +41,39 @@
           </form>
         </div>
         <div class="inline right-header">
-          <a href=""
-            ><img src="/static/uploads/icons_header/coracao.png" alt=""
-          /></a>
-          <a href="/meus-pedidos" class="carrinho-icon">
-            <img src="/static/uploads/icons_header/icon_carrinho.png" alt="" />
-            <span id="contador-carrinho" class="badge">0</span>
-          </a>
-          <a href="/login">Login</a>
+          <div class="perfil-menu-container">
+            <img
+              id="foto-perfil"
+              src="/static/uploads/icons_header/img-perfil.png"
+              alt="imagem de perfil"
+              onclick="toggleMenu()"
+            />
+
+            <div id="menu-perfil" class="popup-menu">
+              <a href="/me/dados_admin">Meus Dados</a>
+              <a href="/logout">Sair</a>
+            </div>
+          </div>
+
+          <script>
+            function toggleMenu() {
+              const menu = document.getElementById("menu-perfil");
+              menu.style.display =
+                menu.style.display === "block" ? "none" : "block";
+            }
+
+            // Fecha o menu se clicar fora
+            window.onclick = function (event) {
+              const menu = document.getElementById("menu-perfil");
+              const foto = document.getElementById("foto-perfil");
+              if (
+                !foto.contains(event.target) &&
+                !menu.contains(event.target)
+              ) {
+                menu.style.display = "none";
+              }
+            };
+          </script>
         </div>
       </header>
 
@@ -63,7 +88,7 @@
             </p>
           </div>
         </div>
-
+        
         <div class="produtos">
           <div class="funcoes">
             <a id="botao-adicionar" href="admin/produto">Adicionar Produto</a>

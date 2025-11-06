@@ -8,3 +8,4 @@ app.mount('/static', StaticFiles(directory='static'), name='static')
 app.include_router(router)
 
 # pip install -r requirements.txt -> instala todas as dependências do projeto
+# pip install argon2_cffi

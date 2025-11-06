@@ -65,8 +65,6 @@ async def listar(request: Request, offset: int = 0, limit: int = 6, categoria: s
         return RedirectResponse(url="/me/produtos", status_code=303)
 
     query = db.query(Produto) # consultar todos os produtos / economizar linha
-
-    
     if categoria:
         query = query.filter(Produto.categoria == categoria) 
         #como o filter() ñ altera o obj query original a gnt temq armazenar na variável, senão será ignorado
@@ -151,16 +149,14 @@ async def login(
 
     if usuario.is_admin:
         token = criar_token({"sub": usuario.email, "is_admin": True})
-        destino = "/admin"
+        destino = "/me/dados_admin"
     else:
         token = criar_token({"sub": usuario.email})
-        destino = "/me/produtos"
+        destino = "/me/dados"
 
     response = RedirectResponse(url=destino, status_code=302)
     response.set_cookie(key="token",value=token,httponly=True)
     return response
-
-# -----   -----
 
 # ----- User Produtos -----
 
@@ -193,13 +189,31 @@ def listar_dados(request: Request, db: Session = Depends(get_db)):
     usuario = db.query(Usuario).filter(Usuario.email == email).first()
     admin = db.query(Usuario).filter(Usuario.is_admin)
     
-    return templates.TemplateResponse('dados.html', {
+    return templates.TemplateResponse('perfil_user.html', { 
         'request': request,
-        'user': usuario,
+        'usuario': usuario,
         'admin': admin
     })
-# -----   -----
-
+# ----- Dados admin  -----
+@router.get("/me/dados_admin", response_class=HTMLResponse)
+def listar_dados(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("token")
+    if not token:
+        return RedirectResponse(url="/login", status_code=303)
+    payload = verificar_token(token)
+    if not payload:
+        return RedirectResponse(url="/login", status_code=303)
+    
+    email = payload.get("sub")
+    usuario = db.query(Usuario).filter(Usuario.email == email).first()
+    admin = db.query(Usuario).filter(Usuario.is_admin)
+    
+    return templates.TemplateResponse('perfil_admin.html', { 
+        'request': request,
+        'usuario': usuario,
+        'admin': admin
+    })
+# loja-user.html
 # ----- User Pedidos -----
 
 @router.get('/me/pedidos', response_class=HTMLResponse)
