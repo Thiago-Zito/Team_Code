@@ -1,0 +1,151 @@
+/* ======= ADMIN DELETAR PRODUTO ======= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background: #f7f7f7;
+  color: #222;
+}
+
+/* HEADER */
+#container_header {
+    display: flex;
+    justify-content: space-between; /* espalha left e right */
+    align-items: center;
+    background: #111;
+    color: #fff;
+    padding: 15px 40px;
+}
+
+#container_header .left-header h2 {
+    margin: 0;
+}
+
+#container_header a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+#container_header a:hover {
+    color: #fff; /* hover branco */
+}
+
+.right-header {
+    /* força alinhamento à direita */
+    text-align: right;
+}
+
+/* HERO */
+.fundo_preto {
+  background: #000;
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.fundo_preto .titulo {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* CONTEÚDO */
+.produtos {
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.categoria {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+}
+
+.categoria h3 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.6rem;
+}
+
+/* TABELA */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+th {
+  background: #111;
+  color: #fff;
+  padding: 12px;
+  font-weight: 600;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+td img {
+  border-radius: 6px;
+}
+
+form button {
+  background: #d9534f;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+form button:hover {
+  background: #c9302c;
+}
+
+.categoria a {
+  display: block;
+  margin: 20px auto;
+  padding: 15px 25px;
+  background: #111;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  min-width: 180px;       /* largura mínima uniforme */
+  border: 2px solid transparent; /* borda transparente padrão */
+  text-align: center;     /* centraliza o texto */
+}
+
+.categoria a:hover {
+  background: aliceblue;
+  border-color: #000;     /* muda só a cor da borda */
+  color: #000;
+}
+/* PERFIL */        
+
+#foto-perfil {
+  margin-left: 15px;
+  width: 40px;
+  border-radius: 50%;       
+  object-fit: cover;        
+  transition: box-shadow 0.5s ease;
+}
+
+#foto-perfil:hover {
+  box-shadow: 0 0 0 5px #ffffff;
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+}

@@ -1,0 +1,147 @@
+/* ======= ADMIN ADICIONAR PRODUTO ======= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background: #f9f9f9;
+  color: #222;
+}
+
+/* HEADER */
+#container_header {
+    display: flex;
+    justify-content: space-between; /* espalha left e right */
+    align-items: center;
+    background: #111;
+    color: #fff;
+    padding: 15px 40px;
+}
+
+#container_header .left-header h2 {
+    margin: 0;
+}
+
+#container_header a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+#container_header a:hover {
+    color: #fff; /* hover branco */
+}
+
+.right-header {
+    /* força alinhamento à direita */
+    text-align: right;
+}
+
+/* HERO */
+.fundo_preto {
+  background: #000;
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.fundo_preto .titulo {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* CONTEÚDO */
+.produtos {
+  display: flex;
+  justify-content: center;
+  padding: 50px 20px;
+}
+
+.categoria {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 650px;
+}
+
+.categoria form {
+  display: flex;
+  flex-direction: column;
+}
+
+.categoria label {
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.categoria input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 5px;
+  transition: 0.3s;
+}
+
+.categoria input:focus {
+  border-color: aliceblue;
+  outline: none;
+}
+
+.categoria button {
+  display: block;
+  margin: 20px 0;          /* espaço vertical */
+  width: 100%;             /* ocupa a mesma largura dos inputs */
+  padding: 12px;           /* altura confortável */
+  background: #111;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 2px solid transparent; /* borda padrão */
+  text-align: center;
+  transition: 0.3s;
+}
+
+.categoria button:hover {
+  background: aliceblue;
+  border-color: #000;
+  color: #000;
+}
+
+.categoria a {
+  display: inline-block;
+  margin-top: 25px;
+  text-decoration: none;
+  color: #111;
+  border: 1px solid #111;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.categoria a:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* PERFIL */        
+
+#foto-perfil {
+  margin-left: 15px;
+  width: 40px;
+  border-radius: 50%;       
+  object-fit: cover;        
+  transition: box-shadow 0.5s ease;
+}
+
+#foto-perfil:hover {
+  box-shadow: 0 0 0 5px #ffffff;
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+}
