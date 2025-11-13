@@ -29,23 +29,72 @@
     <main id="container_main">
       <header id="container_header">
         <div class="inline left-header">
-          <a href="home.html"><h2>Ecommerce</h2></a>
-          <a href="loja.html">Loja</a>
-          <a href="">Sobre</a>
+          <a href="/"><h2>LaVeraBags</h2></a>
+          <a href="/produtos">Loja</a>
+          <a href="/sobre">Sobre</a>
           <form action="">
             <label for="pesquisar"
-              ><img class="icones" src="./img/icons_header/lupa.png" alt=""
+              ><img
+                class="icones"
+                src="/static/uploads/icons_header/lupa.png"
+                alt=""
             /></label>
             <input type="text" id="pesquisar" placeholder="Pesquisar" />
           </form>
         </div>
         <div class="inline right-header">
-          <a href=""><img src="/static/uploads/icons_header/coracao.png" alt="" /></a>
-          <a href="/meus-pedidos" class="carrinho-icon">
-                    <img src="/static/uploads/icons_header/icon_carrinho.png" alt="">
-                    <span id="contador-carrinho" class="badge">0</span>
-          </a>
-          <a href="/login">Login</a>
+          {% if usuario %}
+            <a href=""
+              ><img src="/static/uploads/icons_header/coracao.png" alt=""
+            /></a>
+            <a href="/meus-pedidos" class="carrinho-icon">
+              <img src="/static/uploads/icons_header/icon_carrinho.png" alt="" />
+              <span id="contador-carrinho" class="badge">0</span>
+            </a>
+            <div class="perfil-menu-container">
+              <img
+                id="foto-perfil"
+                src="/static/uploads/icons_header/img-perfil.png"
+                alt="imagem de perfil"
+                onclick="toggleMenu()"
+              />
+
+              <div id="menu-perfil" class="popup-menu">
+                <a href="/me/dados">Meus Dados</a>
+                <a href="/me/pedidos">Meus Pedidos</a>
+                <a href="/logout">Sair</a>
+              </div>
+            </div>
+
+            <script>
+              function toggleMenu() {
+                const menu = document.getElementById("menu-perfil");
+                menu.style.display =
+                  menu.style.display === "block" ? "none" : "block";
+              }
+
+              // Fecha o menu se clicar fora
+              window.onclick = function (event) {
+                const menu = document.getElementById("menu-perfil");
+                const foto = document.getElementById("foto-perfil");
+                if (
+                  !foto.contains(event.target) &&
+                  !menu.contains(event.target)
+                ) {
+                  menu.style.display = "none";
+                }
+              };
+            </script>
+          {% else %}
+            <a href=""
+              ><img src="/static/uploads/icons_header/coracao.png" alt=""
+            /></a>
+            <a href="/meus-pedidos" class="carrinho-icon">
+              <img src="/static/uploads/icons_header/icon_carrinho.png" alt="" />
+              <span id="contador-carrinho" class="badge">0</span>
+            </a>
+            <a href="/login">Login</a>
+          {% endif %}
         </div>
       </header>
       <div class="produto-container">

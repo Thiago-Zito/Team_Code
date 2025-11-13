@@ -1,7 +1,8 @@
-* { 
-    margin: 0;
-    padding: 0;
-    font-family: "Open Sans", sans-serif;
+* {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #222;
 }
 
 #container_main {
@@ -81,6 +82,52 @@
 .icones {
     width: 25px;
 }
+
+/* estilização do icone user -----------------*/
+#foto-perfil {
+  margin-left: 15px;
+  width: 40px;
+  border-radius: 50%;       
+  object-fit: cover;        
+  transition: box-shadow 0.5s ease;
+}
+
+#foto-perfil:hover {
+  box-shadow: 0 0 0 5px #ffffff;
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+}
+
+.perfil-menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Menu pop-up */
+.popup-menu {
+    display: none; /* escondido por padrão */
+    position: absolute;
+    right: 0; /* alinha à direita da foto de perfil */
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    z-index: 10;
+}
+
+/* Links do menu */
+.popup-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Hover nos links */
+.popup-menu a:hover {
+    background-color: #f1f1f1;
+}
+/* -------------------- */
 
 .produto-container {
   position: relative;

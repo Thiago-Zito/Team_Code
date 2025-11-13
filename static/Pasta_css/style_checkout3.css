@@ -1,15 +1,16 @@
-/* Reset básico */
-* { 
-    margin: 0;
-    padding: 0;
-    font-family: "Open Sans", sans-serif;
+* {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #222;
 }
 
-body {
-  background-color: #f2f3f7;
-  color: #111;
+#container_main {
+    margin: 0 auto;
+    /*deixar os elementos no meio*/
+    box-sizing: border-box; 
 }
-
+ /* Header */
 #container_header {
     position: relative;   /* referência para os filhos */
     margin: 0 auto;
@@ -128,131 +129,83 @@ body {
 }
 /* -------------------- */
 
-/* Container principal */
-.container {
+.produto-container {
+  position: relative;
+  top: 150px;
+  display: flex;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.info_envio{
+  margin-bottom: 15px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.carrinho-icon {
+  position: relative;
+  display: inline-block;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #ff4747;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  min-width: 10px;
+  text-align: center;
+}
+
+/*  */
+
+.checkout {
   display: flex;
   justify-content: space-between;
-  padding: 40px 80px;
+  padding: 40px;
   gap: 40px;
 }
 
-/* Carrinho */
-.cart {
+
+.form-section {
   flex: 2;
 }
 
-.cart h2 {
-  font-size: 28px;
-  margin-bottom: 5px;
+.form-section h1 {
+  margin-bottom: 10px;
 }
 
-.cart p {
-  color: #555;
+.steps {
   margin-bottom: 20px;
+  color: #555;
 }
 
-#cart-items {
+.form-section form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-}
-
-.cart-item {
-  display: flex;
   gap: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid #ccc;
 }
 
-.cart-item img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-}
-
-.cart-item-details {
-  flex: 1;
-}
-
-.cart-item-details h4 {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-.cart-item-details p {
-  font-size: 14px;
-  color: #555;
-}
-
-.cart-item-details .price {
-  font-weight: bold;
-  margin-top: 5px;
-}
-
-.cart-item-details .remove {
-  color: #000;
-  font-size: 14px;
-  cursor: pointer;
-  margin-top: 5px;
-  display: inline-block;
-}
-
-/* Informações do pedido */
-.order-info {
-  margin-top: 30px;
-}
-
-.order-info h3 {
-  margin-bottom: 15px;
-}
-
-.accordion div {
-  background-color: #fff;
-  border-bottom: 1px solid #ccc;
-  padding: 10px;
-  cursor: pointer;
+.row {
   display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  color: #555;
+  gap: 10px;
 }
 
-/* Resumo do pedido */
-.summary {
-  flex: 1;
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  height: fit-content;
-}
-
-.summary h3 {
-  margin-bottom: 20px;
-}
-
-.summary input {
-  width: 100%;
+form input, form select {
   padding: 10px;
-  margin-bottom: 20px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  flex: 1;
 }
 
-.line {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
-.line.total {
-  font-weight: bold;
-  font-size: 18px;
-  margin-top: 15px;
-}
-
-/* Botões */
-.summary a button {
+.botao-continuar { 
   width: 100%;
   padding: 12px;
   margin-top: 10px;
@@ -266,31 +219,39 @@ body {
   text-align: center;
   text-decoration: none;
 }
-
-/* Hover nos botões */
-.summary a button:hover {
+.botao-continuar:hover {
   background-color: #333;
 }
 
-/*  */
-
-.carrinho-icon {
-  position: relative;
-  display: inline-block;
-  font-size: 24px;
-  cursor: pointer;
+.cart-section {
+  flex: 1;
+  background: #f5f5f5;
+  padding: 40px;
+  border-radius: 5px;
 }
 
-.badge {
-  position: absolute;
-  top: -17px;
-  right: -10px;
-  background: #ff4747;
-  color: white;
-  border-radius: 40%;
-  padding: 5px 3px;
-  font-size: 15px;
+.cart-section input {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.summary {
+  font-size: 14px;
+}
+
+.summary p {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.summary hr {
+  margin: 10px 0;
+}
+
+.remover_pedido{
+  margin-bottom: 10px;
+  padding: 2px;
   font-weight: bold;
-  min-width: 20px;
-  text-align: center;
 }
