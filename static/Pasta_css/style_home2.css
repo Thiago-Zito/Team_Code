@@ -1,3 +1,29 @@
+#intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;     /* ocupa 100% da largura da tela */
+  height: 100%;    /* ocupa 100% da altura da tela */
+  background: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#intro video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* preenche toda a div sem distorcer */
+  transform: scale(0.5); /* zoom opcional, ajusta como quiser */
+  max-width: none;   /* impede que o vídeo limite a largura */
+  max-height: none;  /* impede que o vídeo limite a altura */
+}
+/* Oculta o main inicialmente */
+#container_main {
+  display: none;
+}
+
 * {
   font-family: "Open Sans", sans-serif;
   margin: 0;
@@ -6,89 +32,89 @@
 }
 
 #container_main {
-    margin: 0 auto;
-    /*deixar os elementos no meio*/
-    box-sizing: border-box; 
+  margin: 0 auto;
+  /*deixar os elementos no meio*/
+  box-sizing: border-box;
 }
- /* Header */
+/* Header */
 #container_header {
-    position: relative;   /* referência para os filhos */
-    margin: 0 auto;
-    width: 100%;
-    height: 80px;         /* altura fixa do header */
-    padding: 15px;
-    background-color: #000;
-    border-bottom: 1px solid #fff;
+  position: relative; /* referência para os filhos */
+  margin: 0 auto;
+  width: 100%;
+  height: 80px; /* altura fixa do header */
+  padding: 15px;
+  background-color: #000000;
+  border-bottom: 1px solid #fff;
 }
 
 /* links em linha */
 .inline {
-    display: flex;
-    flex-direction: row;
-    gap: 25px;
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
 }
 
 /* bloco da esquerda */
 .left-header {
-    position: absolute;
-    top: 15px;
-    left: 80px;  /* você pode mudar esse valor */
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  position: absolute;
+  top: 15px;
+  left: 80px; /* você pode mudar esse valor */
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .left-header h2 {
-    font-size: 25px;
-    line-height: 1.6;
-    color: white;
+  font-size: 25px;
+  line-height: 1.6;
+  color: white;
 }
 
 .left-header a {
-    font-size: 17px;
-    text-decoration: none;
-    font-weight: 500;
-    color: white;
+  font-size: 17px;
+  text-decoration: none;
+  font-weight: 500;
+  color: white;
 }
 
 /* pesquisa */
 #pesquisar {
-    background-color: transparent;
-    border: none;
-    color: white;
+  background-color: transparent;
+  border: none;
+  color: white;
 }
 
 /* bloco da direita */
 .right-header {
-    position: absolute;
-    top: 25px;
-    right: 80px;  /* você pode mudar esse valor */
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  position: absolute;
+  top: 25px;
+  right: 80px; /* você pode mudar esse valor */
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .right-header form input {
-    border: none;
+  border: none;
 }
 
 .right-header a {
-    font-size: 17px;
-    text-decoration: none;
-    font-weight: 500;
-    color: white;
+  font-size: 17px;
+  text-decoration: none;
+  font-weight: 500;
+  color: white;
 }
 
 .icones {
-    width: 25px;
+  width: 25px;
 }
 
 /* estilização do icone user -----------------*/
 #foto-perfil {
   margin-left: 15px;
   width: 40px;
-  border-radius: 50%;       
-  object-fit: cover;        
+  border-radius: 50%;
+  object-fit: cover;
   transition: box-shadow 0.5s ease;
 }
 
@@ -98,34 +124,34 @@
 }
 
 .perfil-menu-container {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 /* Menu pop-up */
 .popup-menu {
-    display: none; /* escondido por padrão */
-    position: absolute;
-    right: 0; /* alinha à direita da foto de perfil */
-    background-color: #fff;
-    min-width: 160px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    border-radius: 5px;
-    z-index: 10;
+  display: none; /* escondido por padrão */
+  position: absolute;
+  right: 0; /* alinha à direita da foto de perfil */
+  background-color: #fff;
+  min-width: 160px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 10;
 }
 
 /* Links do menu */
 .popup-menu a {
-    display: block;
-    padding: 10px 15px;
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
 }
 
 /* Hover nos links */
 .popup-menu a:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 /* -------------------- */
 
@@ -140,132 +166,133 @@
 
 /* Topo */
 .container_topo {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    height: 100vh;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  justify-content: center;
 }
 
 .txt_topo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 40vh;
 }
 
 .txt_topo h2 p {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .txt_topo h2 {
-    font-size: 60px;
+  font-size: 60px;
 }
 
 .txt_topo p {
-    font-size: 30px;
-    font-weight: 500;
-    opacity: 0.5;
+  font-size: 30px;
+  font-weight: 500;
+  opacity: 0.5;
 }
 
 .botao {
-    text-decoration: none;
-    color: black;
-    padding: 10px 20px;
-    border: 1px solid #000;
-    background-color: white;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
+  text-decoration: none;
+  color: black;
+  padding: 10px 20px;
+  border: 1px solid #000;
+  background-color: white;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
 }
-.botao:hover{
+.botao:hover {
   background-color: #000;
   color: #fff;
 }
 
 .img_topo {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/static/uploads/img_topo/princip.webp") no-repeat center/cover;
-    background-size: cover;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60vh;
-    max-width: 1700px;
-    margin-top: 30px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/static/uploads/img_topo/princip.webp") no-repeat center/cover;
+  background-size: cover;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  max-width: 1700px;
+  margin-top: 30px;
 }
 
 .img_topo h2 {
-    background-color: transparent;
-    font-size: 60px;
-    color: white;
-    font-weight: 600;
+  background-color: transparent;
+  font-size: 60px;
+  color: white;
+  font-weight: 600;
 }
 
 /* Meio */
 .container_meio {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
 .txt_meio {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 40vh;
 }
 
 .txt_meio h2 p {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .txt_meio h2 {
-    font-size: 60px;
+  font-size: 60px;
 }
 
 .txt_meio p {
-    font-size: 30px;
-    font-weight: 500;
-    opacity: 0.5;
+  font-size: 30px;
+  font-weight: 500;
+  opacity: 0.5;
 }
 
 .img_meio {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 20px;
 }
 
 .img_meio img {
-    width: 25rem;
-    height: 35rem;
-    overflow: hidden;
-    border-radius: 5px;
+  width: 25rem;
+  height: 35rem;
+  overflow: hidden;
+  border-radius: 5px;
 }
 
 .img_meio1 {
-    margin-top: 70px;
+  margin-top: 70px;
 }
 
 .img_meio3 {
-    margin-top: 70px;
+  margin-top: 70px;
 }
 
 .opacidade {
-    filter: brightness(65%);
+  filter: brightness(65%);
 }
 
 /* Footer */
@@ -363,7 +390,6 @@
   color: #fff;
 }
 
-
 /* Bolsas_quadrado */
 /* CSS */
 .bolsa-section {
@@ -402,7 +428,6 @@
   flex: 1;
   min-width: 600px;
   max-width: 715px;
-  
 }
 
 .bolsa-item img {
@@ -411,11 +436,11 @@
   background-color: #e4e4e4;
 }
 
-.bolsa_1 img{
-    background-color: #d4d4d4;
+.bolsa_1 img {
+  background-color: #d4d4d4;
 }
-.bolsa_4 img{
-    background-color: #d4d4d4;
+.bolsa_4 img {
+  background-color: #d4d4d4;
 }
 
 /* Botão Ver Mais */
@@ -437,7 +462,6 @@
   background-color: #000;
   color: #fff;
 }
-
 
 /*  */
 
